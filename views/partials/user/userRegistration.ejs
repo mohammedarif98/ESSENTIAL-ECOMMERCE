@@ -1,0 +1,167 @@
+
+
+<div class="signup-popup">
+    <div class="box">
+        <div class="img-area">
+            <div class="img">
+        </div>
+    </div>
+        <div class="form">
+            <div class="sclose">&times;</div>
+            <h1 class="text-center">SignUp Page</h1>
+            <form method="post" action="/userSignup" onsubmit="return signupValidation()">            
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Username" id="username" name="username" class="form-control" required>
+                    <p id="usernameError" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Email" id="reg-email" name="email" class="form-control" required>
+                    <p id="emailError" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input type="number" placeholder="Enter Phone Number" id="phone" name="phone" class="form-control" required>
+                    <p id="phoneError" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Enter Password" id="reg-password" name="password" class="form-control"  required>
+                    <p id="passwordError" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Enter Confirm Password" id="reg-confirmpassword" name="confirmPassword" class="form-control" required>
+                    <p id="confirmpasswordError" class="text-danger"></p>
+                </div>
+                <div class="form-group d-flex justify-content-between align-items-center"> 
+                    <div><a href="/" name="" class="link-style">Already have an account?</a> </div>
+                </div>
+                <button type="submit" class="btn btn-dark">Sign-Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function signupValidation(){
+
+        const username = document.getElementById('username');
+        const email = document.getElementById('reg-email');
+        const phone = document.getElementById('phone');
+        const password = document.getElementById('reg-password');
+        const confirmpassword = document.getElementById('reg-confirmpassword');
+
+        //----------Error feilds
+        const usernameError = document.getElementById('usernameError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmpasswordError = document.getElementById('confirmpasswordError');
+
+        //-----------Regex   
+        const usernameRegex = /^[A-Z]/;
+        const emailRegex = /^[a-z0-9._%+-]+@gmail+\.[a-z]{3}$/;
+        const phoneRegex = /^[0-9]{10}$/;
+        const passwordRegex = /^.{4,}$/;
+        // const confirmpasswordRegex = /^[a-zA-Z\d]{0,10}$/;
+
+        //*----------- name field -----------
+        if(username.value.trim() === ''){
+            usernameError.innerHTML = 'Field is required'
+            setTimeout(()=>{
+                usernameError.innerHTML = ''
+            },2000);
+            return false;
+        }
+        if(!usernameRegex.test(username.value)){
+            usernameError.innerHTML = 'First letter should be capital'
+            setTimeout(()=>{
+                usernameError.innerHTML = ''
+            },2000);
+            return false;
+        }
+       //* ------------- email field ------------
+        if(email.value.trim() === ''){
+            emailError.innerHTML = 'Field is required'
+            setTimeout(()=>{
+                emailError.innerHTML = ''
+            },2000);
+            return false;
+        }
+        if(!emailRegex.test(email.value)){
+            emailError.innerHTML = 'Please enter valid email'
+            setTimeout(()=>{
+                emailError.innerHTML = ''
+            },2000);
+            return false;
+            }
+       
+        //* ------------- phone field ------------
+        if(phone.value.trim() === ''){
+                phoneError.innerHTML = 'Field is required'
+                setTimeout(()=>{
+                    phoneError.innerHTML = ''
+                },2000);
+                return false;
+        }
+        
+        if(!phoneRegex.test(phone.value)){
+            phoneError.innerHTML = "Enter correct phone number"
+            setTimeout(()=>{
+                phoneError.innerHTML = ''
+            },2000);
+            return false;
+        }
+       
+        //*------------- password field----------
+        if(password.value.trim() === ''){
+            passwordError.innerHTML = 'Field is required'
+            setTimeout(()=>{
+                passwordError.innerHTML = ''
+            },2000);
+            return false
+        }
+        
+        if(!passwordRegex.test(password.value)){
+            passwordError.innerHTML = 'Password should be at least 4 characters long';
+            setTimeout(() => {
+                passwordError.innerHTML = ''
+            }, 2000);
+            return false;
+        }
+       
+        //*------------- confirm password field----------
+        if(confirmpassword.value.trim() === ''){
+            confirmpasswordError.innerHTML = 'Field is required'
+            setTimeout(()=>{
+                confirmpasswordError.innerHTML = ''
+            },2000);
+            return false
+       }
+       
+       //--------------- Password and Confirm Password checking
+        if(password.value !== confirmpassword.value){
+            confirmpasswordError.innerHTML = 'Passwords do not match';
+            setTimeout(() => {
+                confirmpasswordError.innerHTML = ''
+            },2000);
+            return false;
+        }
+
+    return true; // All validations passed
+
+    }
+
+</script>
+
+
+
+    <!-- // // ------------ Error handling from backend --------------
+    // setTimeout(()=>{
+    //     var emailErrorMsg = document.getElementById('emailErrorMsg'); 
+    //     if(emailErrorMsg){
+    //         emailErrorMsg.style.display = 'none';
+    //     }
+    // },6000); -->
+
+
+

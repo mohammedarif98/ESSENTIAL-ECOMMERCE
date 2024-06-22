@@ -1,0 +1,111 @@
+
+<aside id="left-panel" class="left-panel" style="border-right:2px solid black;">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li class="mt-5">
+                    <a href="/admin/adminhome"><i class="menu-icon fa fa-laptop text-dark font-weight-bold"></i><span class="text-dark">Dashboard</span></a>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-users"></i>User Management</a>
+                    <ul class="sub-menu children dropdown-menu">                            
+                        <li><i class="fa fa-table text-white"></i><a href="/admin/adminlistuser">Users List</a></li>
+                    </ul>
+                </li>
+                
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-list"></i>Category Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table text-white"></i><a href="/admin/adminlistcategory">Category List</a></li>                      
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-product-hunt"></i>Product Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th text-white"></i><a href="/admin/adminlistproduct">Product List</a></li>
+                        <li><i class="menu-icon fa fa-plus text-white"></i><a href="/admin/addproductpage">Add Product</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-shopping-cart"></i>Order Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th text-white"></i><a href="/admin/orderManagement">Order List</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-ticket"></i>Coupon Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li class="active"><i class="menu-icon fa fa-th text-white"></i><a href="/admin/couponManagementPage">Coupon List</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-tag"></i>Offer Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th text-white"></i><a href="/admin/ProductOfferMangement">Product Offers List</a></li>
+                        <li><i class="menu-icon fa fa-th text-white" ></i><a href="/admin/categoryOfferMangement">Category Offers List</a></li>
+                    </ul>
+                </li> 
+                
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-tag"></i>Report Managment</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th text-white"></i><a href="/admin/reportView">Sales Report List</a></li>
+                    </ul>   
+                </li>
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all the list items
+        var listItems = document.querySelectorAll(".nav.navbar-nav .menu-item-has-children");
+
+        // Add click event listener to each list item
+        listItems.forEach(function(item) {
+            item.addEventListener("click", function() {
+                // Remove active class from all list items
+                listItems.forEach(function(li) {
+                    li.classList.remove("active");
+                });
+                
+                // Add active class to the clicked list item
+                this.classList.add("active");
+            });
+        });
+    });
+
+</script>
+<style>
+    .nav.navbar-nav .menu-item-has-children.active {
+        background-color: black;
+    }
+    
+    .nav.navbar-nav .menu-item-has-children.active > a {
+        color: white;
+    }
+    
+    .nav.navbar-nav .menu-item-has-children.active > a > .menu-icon {
+        color: white;
+    }
+
+    .nav.navbar-nav .menu-item-has-children.active > .sub-menu.children.dropdown-menu {
+        background-color: black;
+    }
+
+    .nav.navbar-nav .menu-item-has-children.active > .sub-menu.children.dropdown-menu a {
+        color: white;
+    }
+
+    /* .nav.navbar-nav .menu-item-has-children.active > .sub-menu.children.dropdown-menu > .menu-icon {
+        color: white;
+    } */
+</style>

@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+
+</head>
+
+<style>
+    .swal-title-size {
+        font-size: 18px;
+        color: white;
+    }
+    .swal-bg-color {
+        background-color: #149c1d; 
+        width: 300px; /* Adjust the width as needed */
+        height: 60px;
+    }
+    .custom-confirm-button {
+        background-color: #000000 !important; /* Change the background color */
+        width: 200px !important; /* Change the width */
+    }
+    .swal-confirm-button-class {
+        width: 200px;
+        height: 40px;
+    }
+
+    .swal-cancel-button-class {
+        width: 200px;
+        height: 40px;
+    }
+</style>
+
+<body>
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/uSerRegistration.ejs') %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>WishList</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">        
+                <div class="col-lg-12 col-md-12">
+                    <% if(userWishlist.length>=1){ %>
+                        <div class="row">
+                            <% for(let i=0;i<userWishlist.length;i++){ %>
+                                <div class="col-lg-3 col-md-4 mb-4" id="wishlist-row-<%=i%>">
+                                    <div class="product__item" >
+                                        <div class="product__item__pic" style="background-image: url('/admin/asset/img/product/<%= userWishlist[i].productId.images[0] %>');">
+                                            <div class="label new">New</div>
+
+                                            <div class="wishlist d-flex justify-content-end m-2">
+                                                <span class="d-flex justify-content-center align-items-center" style="width: 40px;height:40px;border-radius:50%;">
+                                                    <i onclick="removeWishlist('<%= userWishlist[i].productId._id %>','wishlist-row-<%=i%>')" class="bi bi-heart-fill" style="color:rgb(226, 8, 8);font-size:24px;"></i>
+                                                </span>
+                                            </div>
+
+                                            <ul class="product__hover">
+                                                <li><a href="/admin/asset/img/product/<%= userWishlist[i].productId.images[0] %>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                                <!-- <li><a href="#" onclick="removeWishlist('<%#= userWishlist[i].productId._id %>','wishlist-row-<%#=i%>')"><span class="icon_heart_alt"></span></a></li> -->
+                                                <li><a href="#" onclick="addToCart('<%= userWishlist[i].productId._id %>',event)"><span class="icon_bag_alt"></span></a></li>
+                                            </ul>
+                                            <% if (userWishlist[i].productId.quantity <= 0) { %>
+                                                <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;font-size:small;" class="alert-danger text-danger p-2 font-weight-bold badge">Out of stock</span>
+                                            <% } %>
+                                        </div>
+                                        <div class="product__item__text mt-auto">
+                                            <h6 class=""><a href="#" onclick="redirectToProductDetail('<%= userWishlist[i].productId._id %>',event)"><%= userWishlist[i].productId.productName %></a></h6>
+                                            <div class="rating my-2">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <% if (userWishlist[i].productId.price && userWishlist[i].productId.offerPrice) { %>
+                                                <div class="product__price" style="display: flex; justify-content:space-evenly;">
+                                                    <span>&#8377; <%= userWishlist[i].productId.price %></span>
+                                                    <p class="font-weight-bold">&#8377; <%= userWishlist[i].productId.offerPrice %></p>
+                                                </div>
+                                            <% } else { %>
+                                                <div class="product__price"><%= userWishlist[i].productId.price %></div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div> 
+
+                        <!-- pagination -->
+                            <!-- <div class="col-lg-12 text-center mt-5">
+                                <div class="pagination__option d-inline-block"> -->
+                                    <%# if (page>1) { %>
+                                        <!-- <a href="wishlistPage?page=<%#= page-1 %>"><i class="fa fa-angle-left"></i></a> -->
+                                    <%# } %>
+                                    <!-- <a href="#"><%#= page %></a> -->
+                                    <!-- <a href="#"><%#- totalPages %></a> -->
+                                    <%# if (page<totalPages) { %>
+                                        <!-- <a href="wishlistPage?page=<%#= page+1 %>"><i class="fa fa-angle-right"></i></a> -->
+                                    <%# } %>
+                                <!-- </div> -->
+                            <!-- </div>     -->
+                        <!-- pagination end -->
+
+                    <%}else{%>     
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <p class="text-dark font-weight-bold">Wishlist is Empty</p>
+                            </div>
+                        </div>                                 
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Js Plugins -->
+    <!-- <script src="/home/asset/js/jquery-3.3.1.min.js"></script> -->
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jquery -->
+    
+    
+    <script>
+
+        function redirectToProductDetail(productId,event){
+            window.location.href = '/productdetailpage?pid=' + productId;
+        }
+
+        function removeRow(rowid){
+            const el = document.getElementById(rowid);
+            el.remove();
+            return;
+        }
+        
+        function addToCart(productid,event){
+            event.preventDefault();
+            //-----------------
+            $.ajax({
+                method: 'POST',
+                url: '/addToCart',
+                data: { productid }, 
+                success : function(res){
+                    // Handle the response
+                    if(res.notLogin){
+                        Swal.fire({
+                            title: "Login Required!",
+                            showConfirmButton: true,
+                            confirmButtonColor: '#000000', 
+                            customClass: {
+                                confirmButton: 'custom-confirm-button',
+                                cancelButton: 'custom-cancel-button'
+                            },
+                            width: '450px', 
+                            allowOutsideClick: false,
+                        }).then(() => {
+                            const btn = document.querySelector('.login-button');
+                            const clickEvent = new MouseEvent('click', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            });
+                            btn.dispatchEvent(clickEvent);
+                        });
+                    }else if(res.toCart){
+                        if (typeof res.cartcount == "number") {
+                            const cartl = document.getElementById("cartlenght");
+                            cartl.innerHTML = res.cartcount;
+                        }
+                        Swal.fire({
+                            position: "bottom-end",
+                            title: "<i class='fa-solid fa-thumbs-up'>&nbsp</i> Item Added To Cart",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            customClass: {
+                                title: 'swal-title-size',
+                                popup: 'swal-bg-color',
+                            },
+                            html: true, // Enable HTML content
+                            backdrop: false
+                        });
+                    }else{
+                        Swal.fire({
+                            position: "bottom-end",
+                            title: "Item Not Added To Cart",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
+
+        function removeWishlist(productId,rowid){
+            Swal.fire({
+                text: "Are you sure to remove item ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#771111',
+                cancelButtonColor: 'black',
+                confirmButtonText: 'Remove',
+                customClass: {
+                        confirmButton: 'swal-confirm-button-class',
+                        cancelButton: 'swal-cancel-button-class',
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed){
+                        $.ajax({
+                            method: 'POST',
+                            url: '/removeWishlistItem',
+                            data: { productId },
+                            success: (res)=>{
+                                if(res.itemRemoved){                             
+                                    removeRow(rowid);
+                                    if(typeof res.wishlistSize == "number"){
+                                        const wishlisticon = document.getElementById("wishlisticon");
+                                        wishlisticon.innerHTML = res.wishlistSize;
+                                    };                            
+                                }else{
+                                    Swal.fire('Wishlist item not removed');
+                                }
+                            },error:(err)=>console.log(err)
+                        });
+                    }
+                });
+        }
+
+        
+    </script>
+
+</body>
+</html>

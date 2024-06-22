@@ -1,0 +1,140 @@
+
+
+<div class="login-popup">
+    <div class="box">
+        <div class="img-area">
+            <div class="img"></div>
+        </div>
+        <div class="form">
+            <div class="close">&times;</div>
+            <!-- <h4 class="text-center mb-2">Log In</h4> -->
+            <p id="blockedError" class="text-danger text-center font-weight-bold"></p>
+            <form id="login-form" method="post" action="/userLogin" class="mt-4">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Enter Email" value="arifcsidhik@gmail.com" name="email" class="form-control my-0" >
+                    <p id="emailError" class=" text-danger ml-3"></p>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Enter Password" value="qwerty11" name="password" class="form-control my-0" >
+                    <p id="passwordError" class="text-danger ml-3"></p> 
+                </div>
+                <div class="form-groups d-flex justify-content-between align-items-center">
+                    <div><a href="/passwordForgetPage" class="link-style">Forgot password?</a></div>
+                    <div><a class="link-style  signup-button" style="cursor: pointer;">Don't have an account?</a></div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                </div>
+                <div class="row social-btn">
+                    <div class="col-lg-6 col-md-6 col-sm-6 d-inline-block">
+                        <button type="" name="" class="btn btn-warning facebook mt-4" style="background-color:rgb(5,109,170);height:4vh;">
+                            <i class="fa-brands fa-facebook-f" ></i>
+                        </button>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 d-inline-block">
+                        <button type="" class="btn btn-primary google mt-4" style="background-color:rgb(226,32,32);height:4vh;">
+                            <i class="fa-brands fa-google"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#login-form').submit(function(event) {
+            event.preventDefault();
+    
+            var formData = {
+                email: $('#email').val(),
+                password: $('#password').val()
+            };
+    
+            $.ajax({
+                type: 'POST',
+                url: '/userLogin',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = '/';
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (xhr.status === 401) {
+                        if (response.emailMsg) {
+                            $('#emailError').text(response.emailMsg);
+                                setTimeout(function() {
+                                $('#emailError').text('');
+                            },3000);
+                        
+                        } else if (response.passwordMsg) {
+                            $('#passwordError').text(response.passwordMsg);
+                            setTimeout(function() {
+                                $('#passwordError').text('');
+                            }, 3000);
+                        
+                        } else if (response.blocked) {
+                            $('#blockedError').text(response.blockedMsg);
+                            setTimeout(function() {
+                                $('#blockedError').text('');
+                            }, 3000);
+                        }
+                    } else {
+                        console.log(response.message);
+                        // Handle other server errors
+                    }
+                }
+            });
+        });
+    });
+    </script>
+
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#login-form').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/userLogin',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = '/';
+                    } else if (response.blocked) {
+                        $('#blockedError').text(response.blockedmsg);
+                        setTimeout(function() {
+                            $('#blockedError').text('');
+                        }, 5000);
+                    } else if (response.emailMsg === "Invalid Email") {
+                        $('#emailError').text(response.emailMsg);
+                        setTimeout(function() {
+                            $('#emailError').text('');
+                        }, 5000);
+                    }else if (response.passwordMsg === "Invalid Password"){
+                        $('#passwordError').text(response.passwordMsg);
+                        setTimeout(function() {
+                            $('#passwordError').text('');
+                        }, 5000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status === 401) {
+                        $('#generalError').text("Invalid email or password.");
+                    } else {
+                        $('#generalError').text("An error occurred. Please try again later.");
+                    }
+                }
+            });
+        });
+    });
+</script> -->

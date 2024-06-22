@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+
+</head>
+<body>
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%#- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/uSerRegistration.ejs') %>
+
+    <style>
+        .bg-image {
+            background-image: url('/home/asset/img/404\ error\ lost\ in\ space-pana.png');
+            background-size:contain; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            height: 100%; 
+            background-color: rgb(0, 0, 0);
+            position: relative;
+        }
+        .home{
+            position: absolute;
+            top: 15%;
+            left: 45%;
+        }
+    </style>
+    
+    <div class="bg-image">
+        <div class="home text-white">Click Here To Back To Home &nbsp;&nbsp;
+            <!-- <a href="/" style="font-s;"></a> -->
+            <button class="btn btn-success btn-sm text-white" onclick="toHome()">GO TO HOME</button>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <%#- include('./partials/home/homeFooter.ejs') %>
+
+    <!-- Js Plugins -->
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+
+    <script>
+        function toHome() {
+            window.location.href = '/';
+        }
+    </script>
+
+</body>
+</html>

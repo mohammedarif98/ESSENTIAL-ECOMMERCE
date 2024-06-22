@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+   <link rel="stylesheet" href="/user/asset/css/userDash.css" type="text/css">
+
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    .form-control:focus {
+        border-color: #ced4da; /* Set border color to default */
+        box-shadow: none; /* Remove box shadow */
+    }
+    .ss{
+        color: #000;
+    }
+    .ss:hover {
+     color: #f7f3f3;
+     background-color: #000;  
+    }
+</style>
+
+<body style="background-color: rgb(240, 240, 240);">
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/userRegistration.ejs') %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content in offcanvas -->
+    
+    <div class="container py-lg-5 py-md-3 py-sm-2" style="max-width: 80%;">
+        <div class="row">
+            <div class="col-md-4 col-lg-2">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" >
+                    <a class="nav-link active ss" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fa-solid fa-address-card"></i>&nbsp;&nbsp;Dashboard</a>
+                    <a class="nav-link ss" id="v-pills-address-tab" data-toggle="pill" href="#v-pills-address" role="tab" aria-controls="v-pills-address" aria-selected="false"><i class="fa-solid fa-address-book"></i>&nbsp;&nbsp;My Addresses</a>
+                    <a class="nav-link ss" id="v-pills-addresses-tab" data-toggle="pill" href="#v-pills-addresses" role="tab" aria-controls="v-pills-addresses" aria-selected="false"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Address</a>
+                    <a class="nav-link ss" href="/orderList" role="tab" ><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Orders</a>
+                    <a class="nav-link ss" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fa-solid fa-wallet"></i>&nbsp;&nbsp;Wallet</a>
+                    <!-- <a class="nav-link ss" id="v-pills-wallet-tab" data-toggle="pill" href="#v-pills-wallet" role="tab" aria-controls="v-pills-wallet" aria-selected="false"><i class="fa-solid fa-key"></i>&nbsp;&nbsp;Update Password</a> -->
+                    <a class="nav-link ss" id="v-pills-messages-tab" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Logout Confirmation Modal -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="d-flex flex-row-reverse m-3">
+                            <i class="fa-solid fa-xmark" aria-label="Close" data-bs-dismiss="modal" style="font-size:20px;"></i>
+                        </div>
+                        <div class="modal-body mx-auto my-2"><p class="h5" style="color: #000;">Are you sure you want to Logout?</p></div>
+                        <div class="d-flex justify-content-between m-3">
+                            <button type="button" aria-label="Close" data-bs-dismiss="modal" class="btn btn-dark w-50" style="margin-right:10px;">Cancel</button>
+                            <a href="/userLogout" class="btn btn-danger w-50">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-8 col-lg-10">
+                <div class="tab-content" id="v-pills-tabContent">
+
+                    <!-- DashBoard -->
+                    <div class="card tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    
+                                    <div class="rounded-top  text-white d-flex flex-column flex-lg-row" style="background-color:#272525;">
+                                        <% if(!user.image){%>
+                                        <div class="d-flex flex-column justify-content-center align-items-center ">
+                                            <img src="/user/asset/img/3135715.png" alt="pro pic" class="img-fluid img-thumbnail ml-3 mt-4" style="max-height: 170px;max-width:140px;min-height:170px;min-width:120px;z-index:1;">
+                                            <div class="pic mb-3">
+                                                <form action="/addProfilePicture" method="post" enctype="multipart/form-data">
+                                                    <input id="profilepic" class="form-control" type="file" accept="image/*" name="image" onchange="showSubmitButton(); hideProfilePic();" style="display: none;">
+                                                    <label for="profilepic" class="btn btn-dark ml-3" style="color:#000;background-color: #ced4da;cursor: pointer;">Add Profile</label>
+                                                    <button id="submitButton" class="btn btn-success ml-3" type="submit" style="display: none;width:140px;">Add</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <% } else{%>
+                                            <div class="d-flex flex-column justify-content-center align-items-center ">
+                                                <img src="/user/asset/img/userImage/<%= user.image %>" alt="pro pic" class="img-fluid img-thumbnail ml-3 mt-4" style="max-height:170px;max-width:140px;min-height:170px;min-width:120px;z-index:1;">
+                                                <div class="pic mb-3">
+                                                    <form action="/addProfilePicture" method="post" enctype="multipart/form-data">
+                                                        <input id="profilepic" class="form-control" type="file" accept="image/*" name="image" onchange="showSubmitButton(); hideProfilePic();" style="display: none;">
+                                                        <label for="profilepic" class="btn btn-dark ml-3" style="color:#000;background-color: #ced4da;cursor: pointer;">Update Profile</label>
+                                                        <button id="submitButton" class="btn btn-success ml-3" type="submit" style="display: none;width:140px;">Add</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <% } %>
+
+                                        <div class="d-flex align-items-center mx-2">
+                                            <h5 style="font-size: 20px; font-weight: 500;"><%= user.username %></h5>
+                                        </div>                                        
+                                        <div class="edit ml-auto d-flex align-items-end mx-4 mb-4">
+                                            <button id="pushBtn" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1">Edit</button>
+                                            <button id="Referal" onclick="referal('<%= user._id %>')" class="btn btn-success mx-2">Referal</button>
+                                        </div>                                        
+                                    </div>                                     
+                    
+                                    <!--profile edit Modal Start -->
+                                    <div class="modal fade" id="exampleModal1" role="dialog" aria-labelledby="exampleModalLabel" data-current-step="1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/editProfile" method="post">
+                                                        <fieldset data-step="1">
+                                                            <div class="form-group">
+                                                                <label for="user_name">User Name :</label>
+                                                                <input type="text" value="<%= user.username %>" name="username" id="" class="form-control" required />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="full_name">Email :</label>
+                                                                <input type="email" value="<%= user.email %>" name="email" id="" class="form-control" readonly required />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="birthday">Phone :</label>
+                                                                <input type="number" value="<%= user.phone %>" name="phone" id="" class="form-control" required />
+                                                            </div>
+                                                        </fieldset>
+                    
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-dark w-100">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal End -->
+                                                                
+                                    <!-- profile section -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="my-4" >
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><span style="font-size:smaller">USER DETAIL</span></a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"><span style="font-size:smaller">WALLET DETAIL</span></a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                                            <div class="row">
+                                                               <div class="col">
+                                                                    <div class="row my-1">
+                                                                        <div class="col-sm-4 ">
+                                                                            <p class="font-weight-bold" style="font-size: 15px;">Full Name : <%= user.username %></p>
+                                                                        </div>
+                                                                        <div class="col-sm-4 ">
+                                                                            <p class="font-weight-bold" style="font-size: 15px;">Email : <%= user.email %></p>
+                                                                        </div>
+                                                                        <div class="col-sm-4 ">
+                                                                            <p class="font-weight-bold" style="font-size: 15px;">Phone : <%= user.phone %></p>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="row wallet my-1">
+                                                                        <div class="col-lg-6 mt-2">
+                                                                            <p class="font-weight-bold" style="font-size: 15px;">Wallet Balance : ₹ <%= wallet %></p>
+                                                                        </div>
+                                                                        <div class="col-lg-6 mt-2">
+                                                                            <a class="btn btn-dark btn-sm text-white text-uppercase" style="float:right" data-toggle="modal" data-target="#exampleModal">
+                                                                                Add Money <i class="fas fa-plus"></i>
+                                                                            </a>
+                                                                        </div>                                          
+                                                                        <!--wallet Modal -->
+                                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Add Money</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                <!-- Add your form or content here -->
+                                                                                <!-- For example: -->
+                                                                                <form>
+                                                                                    <div class="form-group">
+                                                                                    <label for="amount">Amount:</label>
+                                                                                    <input type="text" class="form-control" id="amount">
+                                                                                    </div>
+                                                                                    <!-- You can add more form fields here -->
+                                                                                </form>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--wallet Modal end-->
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end profile -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                         
+                    <!-- my Address -->
+                    <div class="card tab-pane fade" id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab">
+                        <div class="card-header " role="tab" id="v-collapse-heading-address">
+                            <h5 class="mb-0 ">
+                                <a  href="#v-collapse-address" aria-expanded="false" aria-controls="v-collapse-address" class="text-dark font-weight-bolder">My Addresses</a>
+                            </h5>
+                        </div>
+                        <div class="p-3" id="v-collapse-address" role="tabpanel" aria-labelledby="v-collapse-heading-address" data-parent="#v-pills-tabContent">
+                            <% if (user.address.length > 0){ %>
+                                <% for(let i=0;i<user.address.length;i++){ %> 
+                                    <div class="card-body mb-2" id="aid" style="background-color: rgb(232, 240, 245);">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row my-1">
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p class="text-dark">FullName : <span><%= user.address[i].fullName%></span></p>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>Email : <span><%= user.address[i].email %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>Phone Number : <span><%= user.address[i].phone %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2">
+                                                        <p>Address Type : <span><%= user.address[i].addressType %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-1 col-md-1 d-flex justify-content-end">
+                                                        <div class="dropdown">
+                                                            <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" title="Actions">
+                                                                <i class="fa-solid fa-ellipsis-vertical" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                                                <!-- <li><a class="dropdown-item" href="/updateAddressPage?aid=<%#= i %>"><i class="fa-solid fa-file-pen" style="color: rgb(17, 104, 61);"></i> Update</a></li> -->
+                                                                <li><a class="dropdown-item" href="/updateAddressPage?aid=<%= user.address[i]._id %>"><i class="fa-solid fa-file-pen" style="color: rgb(17, 104, 61);"></i> Update</a></li>
+                                                                <!-- <li><a class="dropdown-item" href="/deleteAddress?aid=<%#= user.address[i]._id %>"><i class="fa-solid fa-trash" style="color: red;"></i> Delete</a></li> -->
+                                                                <li><a class="dropdown-item" onclick="deleteAddress('<%= user.address[i]._id %>')"><i class="fa-solid fa-trash" style="color: red;"></i> Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>                                           
+                                                </div>
+                                                <div class="row my-2">
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>PinCode : <span><%= user.address[i].pinCode %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>City : <span><%= user.address[i].city %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>State : <span><%= user.address[i].state %></span></p>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <p>Country : <span><%= user.address[i].country %></span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row my-1">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <p>Address1 : <span><%= user.address[i].addressLine1%></span></p>
+                                                    </div>
+                                                    <% if(user.address[i].addressLine2){ %>
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <p>Address2 : <span><%= user.address[i].addressLine2 %></span></p>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } else { %>
+                                <div class="card-body"><p>No address found. Please add an address.</p></div>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <!-- add new Address -->
+                    <div class="card tab-pane fade" id="v-pills-addresses" role="tabpanel" aria-labelledby="v-pills-addresses-tab">
+                        <div class="card-header " role="tab" id="v-collapse-heading-addresses">
+                            <h5 class="mb-0 ">
+                                <a href="#v-collapse-addresses" aria-expanded="false" aria-controls="v-collapse-addresses" class="text-dark font-weight-bolder">Add New Address</a>
+                            </h5>
+                        </div>
+                        <div id="v-collapse-addresses" role="tabpanel" aria-labelledby="v-collapse-heading-addresses" data-parent="#v-pills-tabContent">
+                            <div class="card-body">
+                                <form action="/addUserAddress" method="post" class="checkout__form">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!-- <h5 class="mb-1">Add New Address</h5> -->
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="checkout__form__input">
+                                                        <p>FullName :</p><input type="text" name="fullname" placeholder="Enter Fullname">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="checkout__form__input">
+                                                        <p>Email :</p><input type="email" name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="checkout__form__input">
+                                                        <p>Address 1 :</p><input type="text" name="addressline1" placeholder="Enter Street Address">
+                                                    </div>
+                                                    <div class="checkout__form__input">
+                                                        <p>Address 2 : <span>(optional)</span></p><input type="text" name="addressline2" placeholder="Enter Street Address ">
+                                                    </div>
+                                                </div>
+                                                                                                                                 
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="checkout__form__input">
+                                                        <p>Phone :</p><input type="text" name="phone" placeholder="Enter Phone Number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="checkout__form__input">
+                                                        <p>Postcode/Zip :</p><input type="text" name="pincode" placeholder="Enter Pincdoe">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="checkout__form__input">
+                                                        <p>Town/City :</p><input type="text" name="city" placeholder="Enter City Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="checkout__form__input">
+                                                        <p>Country:</p>
+                                                        <select class="form-control" name="country" style="height: 50px;">
+                                                            <option disabled selected value="">Select Country</option>
+                                                            <option value="China">China</option>
+                                                            <option value="India">India</option>
+                                                            <option value="Qater">Qater</option>
+                                                            <option value="Saudi Aradia">Saudi Aradia</option>
+                                                            <option value="Japan">Japan</option>
+                                                            <option value="Spain">Spain</option>
+                                                            <option value="England">England</option>
+                                                            <option value="Russia">Russia</option>
+                                                            <option value="United States">United States</option>
+                                                            <option value="Dubai">Dubai</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                            
+                                                <div class="col-lg-4 col-md-4 col-sm-4"> 
+                                                    <div class="form-group">
+                                                        <label for="addressType">Address Type:</label>
+                                                        <select class="form-control" id="addressType" name="addresstype" style="height: 50px;">
+                                                            <option disabled selected value="">Select AddressType</option>
+                                                            <option value="Home">Home</option>
+                                                            <option value="Work">Work</option>
+                                                        </select>
+                                                    </div>
+                                                </div>    
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="checkout__form__input">
+                                                        <p>State:</p>
+                                                        <select class="form-control" name="state" style="height: 50px;">
+                                                            <option disabled selected value="">Select State</option>                                              
+                                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                            <option value="Assam">Assam</option>
+                                                            <option value="Bihar">Bihar</option>
+                                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                                            <option value="Goa">Goa</option>
+                                                            <option value="Gujarat">Gujarat</option>
+                                                            <option value="Haryana">Haryana</option>
+                                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                            <option value="Jharkhand">Jharkhand</option>
+                                                            <option value="Karnataka">Karnataka</option>
+                                                            <option value="Kerala">Kerala</option>
+                                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                            <option value="Maharashtra">Maharashtra</option>
+                                                            <option value="Manipur">Manipur</option>
+                                                            <option value="Meghalaya">Meghalaya</option>
+                                                            <option value="Mizoram">Mizoram</option>
+                                                            <option value="Nagaland">Nagaland</option>
+                                                            <option value="Odisha">Odisha</option>
+                                                            <option value="Punjab">Punjab</option>
+                                                            <option value="Rajasthan">Rajasthan</option>
+                                                            <option value="Sikkim">Sikkim</option>
+                                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                                            <option value="Telangana">Telangana</option>
+                                                            <option value="Tripura">Tripura</option>
+                                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                            <option value="Uttarakhand">Uttarakhand</option>
+                                                            <option value="West Bengal">West Bengal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-12 mt-4 mb-2">
+                                                    <button type="submit" id="addAddress" class="btn btn-dark w-100">Save</button>
+                                                </div>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Details -->
+                    <!-- <div class="card tab-pane fade" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-order-tab">
+                        <div class="card-header " role="tab" id="v-collapse-heading-order">
+                            <h5 class="mb-0 ">
+                                <a  href="#v-collapse-order" aria-expanded="false" aria-controls="v-collapse-order" class="text-dark font-weight-bolder">Orders</a>
+                            </h5>
+                        </div>
+                        <div id="v-collapse-order" role="tabpanel" aria-labelledby="v-collapse-heading-order" data-parent="#v-pills-tabContent">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead class="thead-dark">
+                                        <tr class="text-white">
+                                            <th>Order Id</th>
+                                            <th>Booked Date</th>
+                                            <th>Payment</th>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        <% for( let i=0;i<orderPagnation.length;i++ ) { %>
+                                            <tr>
+                                                <td><p style="color: #000;">ODR<%= String(orderPagnation[i]._id).slice(-10) %></p></td>
+                                                <td><p style="color: #000;"><%= String(orderPagnation[i].createdAt).slice(4,16) %></p></td>
+                                                <td><p style="color: #000;"><%= orderPagnation[i].paymentDetails %> - 
+                                                    <span class="font-weight-bold text-muted"><%=orderPagnation[i].paymentStatus%></span>
+                                                </p></td>
+                                                <td><p style="color: #000;">
+                                                    <span class="badge p-2
+                                                        <% if (orderPagnation[i].orderStatus === 'ORDER CONFIRMED') { %>
+                                                            alert-warning text-dark font-weight-bold
+                                                        <% } else if (orderPagnation[i].orderStatus === 'ORDER DELIVERED') { %>
+                                                            alert-success text-dark font-weight-bold
+                                                        <% } else if (orderPagnation[i].orderStatus === 'ORDER CANCELLED') { %>
+                                                            alert-danger text-dark font-weight-bold
+                                                        <% } else if (orderPagnation[i].orderStatus === 'ORDER RETURNED') { %>
+                                                            alert-secondary text-dark font-weight-bold
+                                                        <% } else if (orderPagnation[i].orderStatus === 'ORDER DISPACHED') { %>
+                                                            alert-info text-dark font-weight-bold
+                                                        <% } %>">
+                                                        <%= orderPagnation[i].orderStatus %>
+                                                    </span>
+                                                </p></td>
+                                                <td><p style="color: #000;"><%= orderPagnation[i].totalAmount %></p></td>
+                                                <td><a class="btn btn-dark text-white w-100 btn-sm" href="/orderDetails?order_id=<%= orderPagnation[i]._id %>">View</a></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page navigation example" class="d-flex justify-content-end mx-4">
+                                    <ul class="pagination">
+                                        <li class="page-item <%= currentPage == 1 ? 'disabled' : '' %>">
+                                            <a class="page-link text-dark" href="userProfile?page=<%= currentPage - 1 %>&limit=<%= limit %>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <% for(let i = 1; i <= totalPages; i++) { %>
+                                            <li class="page-item <%= i == currentPage ? 'active' : '' %>">
+                                                <a class="page-link text-dark" href="userProfile?page=<%= i %>&limit=<%= limit %>"><%= i %></a>
+                                            </li>
+                                        <% } %>
+                                        <li class="page-item <%= currentPage == totalPages ? 'disabled' : '' %>">
+                                            <a class="page-link text-dark" href="userProfile?page=<%= currentPage + 1 %>&limit=<%= limit %>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>                                                              
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Change passwrod -->
+                    <!-- <div class="card tab-pane fade" id="v-pills-wallet" role="tabpanel" aria-labelledby="v-pills-wallet-tab">
+                        <div class="card-header " role="tab" id="v-collapse-heading-wallet">
+                            <h5 class="mb-0 ">
+                                <a class="text-dark font-weight-bolder" href="#v-collapse-wallet" aria-expanded="false" aria-controls="v-collapse-wallet">Update Password</a>
+                            </h5>
+                        </div>
+                        <div id="v-collapse-wallet" role="tabpanel" aria-labelledby="v-collapse-heading-wallet" data-parent="#v-pills-tabContent">
+                            <div class="row p-4">
+                                <div class="card-body">
+                                    <form action="/updatePassword" method="post">
+                                        <div class="form-group">
+                                            <label>Username : </label>
+                                            <input type="email" class="form-control" value="<%= user.username %>" id="" placeholder="Enter username"  readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email address : </label>
+                                            <input type="email" class="form-control" value="<%= user.email %>" id="email" placeholder="Enter email" readonly>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>New Password : </label>
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password','password')">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Confirm Password : </label>
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmpassword" placeholder="Confirm Password" required>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password','confirmPassword')">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark w-100 mt-3">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- wallet details -->
+                    <div class="card tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <div class="card-header" role="tab" id="v-collapse-heading-messages">
+                            <h5 class="mb-0 ">
+                                <a  href="#v-collapse-messages" aria-expanded="false" aria-controls="v-collapse-messages" class="text-dark font-weight-bolder">Wallet Transactions History</a>
+                            </h5>
+                        </div>
+                        <div id="v-collapse-messages" role="tabpanel" aria-labelledby="v-collapse-heading-messages" data-parent="#v-pills-tabContent">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead class="thead-dark">
+                                        <tr class="text-white">
+                                            <th>Order Id</th>
+                                            <th>Booked Date</th>
+                                            <th>Transaction Type</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        <% for( let i=0;i<user.wallet.length;i++ ) { %>
+                                            <tr>
+                                                <td><p style="color: #000;">ODR<%= String(user.wallet[i]._id).slice(-10) %></p></td>
+                                                <td><p style="color: #000;"><%= String(user.wallet[i].createdOn).slice(4, 16) %></p></td>
+                                                <td><span class="font-weight-bold text-muted"><%=user.wallet[i].transactionType%></span></td>
+                                                <td><p class="font-weight-bold " style="color: #000;"><%= user.wallet[i].amount %></p></td>
+                                                <td><p style="color: #000;">
+                                                    <span class="badge p-2
+                                                        <% if (user.wallet[i].remark === 'ORDER CONFIRMED') { %>
+                                                            alert-warning text-dark font-weight-bold
+                                                        <% } else if (user.wallet[i].remark === 'ORDER DELIVERED') { %>
+                                                            alert-success text-dark font-weight-bold
+                                                        <% } else if (user.wallet[i].remark === 'ORDER CANCELLED') { %>
+                                                            alert-danger text-dark font-weight-bold
+                                                        <% } else if (user.wallet[i].remark === 'ORDER RETURNED') { %>
+                                                            alert-secondary text-dark font-weight-bold
+                                                        <% } else if (user.wallet[i].remark === 'ORDER DISPACHED') { %>
+                                                            alert-info text-dark font-weight-bold
+                                                        <% } %>">
+                                                        <%= user.wallet[i].remark %>
+                                                    </span>
+                                                </p></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <!-- pagination -->
+                                <!-- <nav aria-label="Page navigation example" class="d-flex justify-content-end mx-4">
+                                    <ul class="pagination">
+                                        <li class="page-item <%#= wCurrentPage == 1 ? 'disabled' : '' %>">
+                                            <a class="page-link text-dark" href="userProfile?wPage=<%#= wCurrentPage - 1 %>&wLimit=<%#= wLimit %>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <%# for(let i = 1; i <= totalPages; i++) { %>
+                                            <li class="page-item <%#= i == wCurrentPage ? 'active' : '' %>">
+                                                <a class="page-link text-dark" href="userProfile?wPage=<%#= i %>&wLimit=<%#= wLimit %>"><%#= i %></a>
+                                            </li>
+                                        <%# } %>
+                                        <li class="page-item <%#= wCurrentPage == totalPages ? 'disabled' : '' %>">
+                                            <a class="page-link text-dark" href="userProfile?wPage=<%#= wCurrentPage + 1 %>&wLimit=<%#= wLimit %>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>  -->
+                                <!-- end pagination -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+    
+    <!-- Js Plugins -->
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+    <script src="/user/asset/js/userProfile.js"></script>
+    <script src="https://kit.fontawesome.com/a7c53a016a.js" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- script for load the add new address nav from checkout page directly  -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const tabTriggerEl = document.querySelector(`a[href="${hash}"]`);
+                if (tabTriggerEl) {
+                    const tab = new bootstrap.Tab(tabTriggerEl);
+                    tab.show();
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('addAddress').addEventListener('click',()=>{
+            // window.location.href = "/userProfile"
+            // window.location.replace("/userProfile");
+            window.location.replace(window.location.href);
+        });
+
+        function togglePassword(targetId, confirmId) {
+        var passwordInput = document.getElementById(targetId);
+            var confirmPasswordInput = document.getElementById(confirmId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                confirmPasswordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+                confirmPasswordInput.type = "password";
+            }
+        }
+        //-----------------------
+        function referal(id) {
+            console.log(id,'THIS IS ID');
+            var copyText = `http://localhost:4000/?referal=${id}`;
+            Swal.fire({
+
+                icon: 'success',
+                title: 'Copied SuccessFull',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+
+
+            navigator.clipboard.writeText(copyText)
+                .then(function() {
+                console.log("Text copied to clipboard: " + copyText);
+                
+                // If you want to close something with the class 'close-container' here
+                var noThanksButton = document.querySelector('.close-container button');
+                if (noThanksButton) {
+                    noThanksButton.click();
+                }
+                })
+                .catch(function(err) {
+                console.error("Failed to copy text: " + err);
+                });
+            }
+    </script>   
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

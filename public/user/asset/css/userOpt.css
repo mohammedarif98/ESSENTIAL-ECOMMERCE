@@ -1,0 +1,66 @@
+body{
+    background-color: #ddd;
+}
+
+.bg-body-tertiary{
+  margin: 66.5px 0px;
+}
+
+.otp-field {
+    flex-direction: row;
+    column-gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.otp-field input {
+    height: 45px;
+    width: 42px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1.125rem;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+.otp-field input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.otp-field input::-webkit-inner-spin-button,
+.otp-field input::-webkit-outer-spin-button {
+    display: none;
+  }
+  
+.resend {
+    font-size: 12px;
+  }
+
+.bgWhite{
+    background:rgb(236, 234, 234);
+    box-shadow:0px 3px 6px 0px #cacaca;
+    margin: 45px 0px;
+  }
+  
+.title{
+    font-weight:600;
+    margin-top:20px;
+    font-size:24px
+  }
+  
+.customBtn{
+    border-radius:0px;
+    padding:10px;
+  }
+  
+form input{
+    display:inline-block;
+    width:150px;
+    height:50px;
+    text-align:center;
+  }
+
+.btn{
+    width: 200px;
+    background-color: black;
+    color: white;
+}

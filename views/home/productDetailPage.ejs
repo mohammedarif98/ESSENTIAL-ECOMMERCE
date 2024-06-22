@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">    
+   
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+
+</head>
+
+<style>
+    .swal-title-size {
+        font-size: 18px;
+        color: white;
+    }
+    .swal-bg-color {
+        background-color: #149c1d; 
+        width: 300px; /* Adjust the width as needed */
+        height: 60px;
+    }
+    .custom-confirm-button {
+        background-color: #000000 !important; /* Change the background color */
+        width: 200px !important; /* Change the width */
+    }
+</style>
+
+<body>
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/uSerRegistration.ejs') %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Product Detail</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Product Details Section Begin -->
+     <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__left product__thumb nice-scroll">
+                            <% if (product && product.images) { %>
+                                <% for (let i=0;i<product.images.length;i++) { %>
+                                    <a class="pt" id=""  href="/admin/asset/img/product/<%= product.images[i] %>"><img src="/admin/asset/img/product/<%= product.images[i] %>" alt=""></a>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                <% if (product && product.images) { %>
+                                    <% for(let i=0;i<product.images.length;i++){%>
+                                        <a class="pt" id="product-image-popup" href="/admin/asset/img/product/<%= product.images[i] %>"><img src="/admin/asset/img/product/<%= product.images[i] %>" alt=""></a>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <h3><%= product?.productName || '' %> <span style="font-weight:bold">Brand: <%= product.brandName %> </span></h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <span>( 138 reviews )</span>
+                        </div>
+                        <% if (product.offerPrice) { %>
+                            <div class="product__details__price">₹<%= product.offerPrice %><span class="ml-4 h1">₹ <%= product.price %></span></div>
+                        <% } else { %>
+                            <div class="product__details__price">₹ <%= product.price  %></div>     
+                        <% } %>
+                        <p><%= product.description %></p>
+                        <div class="product__details__button">
+                            <div class="quantity" style="display: none;">
+                                <span>Quantity:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                            <a href="#" onclick="addToCart('<%= product.id %>',event)" class="cart-btn">Add to cart</a>
+                            <ul class="mx-2">
+                                <li class="ml-2">
+                                    <a class="btn" style="background-color:#000000;">
+                                        <% if (locals.user) { %>
+                                            <% const isInWishlist = locals.user.wishlist.some(item => item.productId.toString() === product._id.toString());%>
+                                            <i id="wlist-<%= product._id %>" onclick="addToWishlist('<%= product._id %>', event)" class="bi bi-heart-fill" style="color: <%= isInWishlist ? 'red' : 'rgb(255, 255, 255)' %>;font-size:25px;"></i>
+                                        <% } else { %>
+                                            <i class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 24px;"></i>
+                                        <% } %>
+                                    </a>                                    
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__details__widget">
+                            <ul>
+                                <li>
+                                    <span>Availability:</span>
+                                    <div class="stock__checkbox">
+                                        <% if (product.quantity <= 0) { %>
+                                            <p class=" text-uppercase text-danger" style="font-weight:bolder;"> Out Of Stock</p>
+                                        <% } else { %>
+                                            <p class=" text-uppercase" style="font-weight:bolder;"><%= product.quantity %> In Stock</p>
+                                        <% } %>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Available color:</span>
+                                    <div class="color__checkbox">
+                                        <p class="text-uppercase" style="font-weight:bolder;;"><%= product.color %></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Available size:</span>
+                                    <div class="size__btn">
+                                        <p style="font-weight:bolder;"><%= product.size %></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Product Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <h6>Description</h6>
+                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                consequat massa quis enim.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                quis, sem.</p>
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <h6>Reviews ( 2 )</h6>
+                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                consequat massa quis enim.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                quis, sem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 text-center my-3">
+                    <div class="related__title">
+                        <h5>RELATED PRODUCTS</h5>
+                    </div>
+                </div>
+                <% for(let i=0;i<relatedProduct.length;i++){ %>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic" style="background-image: url('/admin/asset/img/product/<%= relatedProduct[i]?.images[0] %>');">
+                            <div class="label new">New</div>
+
+                            <div class="wishlist d-flex justify-content-end m-2">
+                                <span class="d-flex justify-content-center align-items-center" style="width: 40px;height:40px;border-radius:50%;">
+                                    <% if ( locals.user ) { %>
+                                        <% const isInWishlist = locals.user.wishlist.some(item => item.productId.toString() === relatedProduct[i]._id.toString());%>
+                                        <i id="wlist-<%= relatedProduct[i]._id %>" onclick="addToWishlist('<%= relatedProduct[i]._id %>',event)" class="bi bi-heart-fill" style="color: <%= isInWishlist ? 'red' : 'rgb(255, 255, 255)' %>;font-size:24px;"></i>
+                                    <% } else { %>
+                                        <i class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 24px;"></i>
+                                    <% } %>
+                                </span>
+                            </div>
+
+                            <ul class="product__hover">
+                                <li><a href="/admin/asset/img/product/<%= relatedProduct[i]?.images[0] %>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#" onclick="addToCart('<%= relatedProduct[i]._id %>',event)"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                            <% if (relatedProduct[i].quantity <= 0) { %>
+                                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;font-size: small;" class="alert-danger text-danger p-2 font-weight-bold badge">Out of stock</span>
+                            <% } %>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#"  onclick="redirectToProductDetail('<%= relatedProduct[i]._id %>')"><%= relatedProduct[i]?.productName %></a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price"><%= relatedProduct[i]?.price %></div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+    <!-- Js Plugins -->
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function redirectToProductDetail(productId){
+            window.location.href = '/productdetailpage?pid=' + productId;
+        }
+
+        function addToCart(productid,event){
+            event.preventDefault();
+            //-----------------
+            $.ajax({
+                method: 'POST',
+                url: '/addToCart',
+                data: { productid }, 
+                success : function(res){
+                    // Handle the response
+                    if(res.notLogin){
+                        const loginButton = document.querySelector('.login-button');
+                        if(loginButton){
+                            const clickEvent = new MouseEvent('click', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            });
+                            loginButton.dispatchEvent(clickEvent);
+                        }else{
+                            console.error('Login button not found');
+                        }
+                    }else if(res.toCart){
+                        if (typeof res.cartcount == "number") {
+                            const cartl = document.getElementById("cartlenght");
+                            cartl.innerHTML = res.cartcount;
+                        }
+                        Swal.fire({
+                            position: "bottom-end",
+                            title: "<i class='fa-solid fa-thumbs-up'>&nbsp</i> Item Added To Cart",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            customClass: {
+                                title: 'swal-title-size',
+                                popup: 'swal-bg-color',
+                            },
+                            html: true, // Enable HTML content
+                            backdrop: false
+                        });
+                    }else{
+                        Swal.fire({
+                            position: "bottom-end",
+                            title: "Item Not Added To Cart",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
+ 
+        function addToWishlist(productId,event){
+            event.preventDefault();
+            $.ajax({
+            method : "POST",
+            url : '/addToWishlist',
+            data : { productId },
+            success : function(res){
+                if(res.notLogin){
+                    const loginButton = document.querySelector('.login-button');
+                    if(loginButton){
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        loginButton.dispatchEvent(clickEvent);
+                    }else{
+                        console.error('Login button not found');
+                    }
+                }else if(res.existing){ 
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "<i class='fas fa-solid fa-exclamation-circle'>&nbsp</i> Item already in Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            title: 'swal-title-size',
+                            popup: 'swal-bg-color', 
+                        },
+                        background: '#c01010',
+                        html: true, // Enable HTML content
+                        backdrop: false
+                    });
+                }else if(res.addedToWishlist){
+                    if(typeof res.wishlistSize == "number"){
+                        const wishlisticon = document.getElementById("wishlisticon");
+                        wishlisticon.innerHTML = res.wishlistSize;
+
+                        const wicon = document.getElementById(`wlist-${productId}`);
+                        wicon.style.color = "red";
+                    };
+
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "<i class='fa-solid fa-thumbs-up'>&nbsp</i> Item Added To Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            title: 'swal-title-size',
+                            popup: 'swal-bg-color', 
+                        },
+                        html: true, // Enable HTML content
+                        backdrop: false
+                    });
+                }else{
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Item Not Added To Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+        });
+        }   
+        
+    </script>
+
+</body>
+</html>

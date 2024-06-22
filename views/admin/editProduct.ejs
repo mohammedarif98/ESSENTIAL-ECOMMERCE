@@ -1,0 +1,274 @@
+
+
+
+
+
+<!doctype html>
+<html class="no-js" lang=""> 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E S S E N T I A L - ADMIN</title>
+    <meta name="description" content="E S S E N T I A L  ADMIN">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png"> 
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- font  awsome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/admin/asset/css/adminHome.css" type="text/css">
+    
+
+</head>
+
+<body>
+    <!-- Left Panel -->
+    
+    <%- include('./partials/admin/adminLeftSide.ejs') %>
+
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <%- include('./partials/admin/adminHeader.ejs') %>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+                
+                <div class="clearfix"></div>
+
+                <!-- Add/Edit category -->      
+                <div class="row">
+                    <!-- Add category -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title box-title">Edit Product</h4>
+                                <div class="card-content">
+                                    <div class="todo-list">
+                                        <div class="tdl-holder">
+                                            <div class="tdl-content">
+                                                <form action="/admin/updateproduct/<%= product._id %>" method="post" enctype="multipart/form-data" onclick="return productValidation()">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <label for="productname"><span class="fw-bold text-dark text-capitalize">Product Name:</span></label>
+                                                            <input type="text" name="productname" value="<%= product?.productName %>" id="productname" class="form-control my-0" placeholder="Product Name" required>
+                                                            <p id="productnameError" class="text-danger my-0"></p>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <label for="brandname"><span class="fw-bold text-dark text-capitalize">Brand Name :</span></label>
+                                                            <input type="text" name="brandname" value="<%= product?.brandName %>" id="brandname" class="form-control my-0" placeholder="Brand Name" required>
+                                                            <p id="brandnameError" class="text-danger my-0"></p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="gender"><span class="fw-bold text-dark text-capitalize">Gender : </span></label>
+                                                            <select id="inputState" name="gender"  class="form-control form-control-md" required>
+                                                                <option value="Men"<%= product?.gender === 'Men' ?'selected' :  '' %>>Men</option>
+                                                                <option value="Woman"<%= product?.gender === 'Woman' ? 'selected' : '' %>>Women</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="productcategory"><span class="fw-bold text-dark text-capitalize">Product Category : </span></label>
+                                                            <select id="inputState" name="productcategory" class="form-control form-control-md" required>
+                                                                <% category.forEach(cat => { %>
+                                                                    <option value="<%= cat.categoryName %>" <%= categoryName === cat.categoryName ? 'selected' : '' %> > <%= cat.categoryName %></option>
+                                                                    <% }); %>
+                                                                </select>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="color"><span class="fw-bold text-dark text-capitalize">Color : </span></label>
+                                                            <select id="inputState" name="color" class="form-control form-control-md" required>
+                                                                <option value="white" <%= product?.color === 'White' ? 'selected' : '' %>>White</option>
+                                                                <option value="Black" <%= product?.color === 'Black' ? 'selected' : '' %>>Black</option>
+                                                                <option value="Red" <%= product?.color === 'Red' ? 'selected' : '' %>>Red</option>
+                                                                <option value="Green" <%= product?.color === 'Green' ? 'selected' : '' %>>Green</option>
+                                                                <option value="Yellow" <%= product?.color === 'Yellow' ? 'selected' : '' %>>Yellow</option>
+                                                                <option value="Magenta" <%= product?.color === 'Magenta' ? 'selected' : '' %>>Magenta</option>
+                                                                <option value="Navy" <%= product?.color === 'Navy' ? 'selected' : '' %>>Navy</option>
+                                                                <option value="Orange" <%= product?.color === 'Orange' ? 'selected' : '' %>>Orange</option>
+                                                                <option value="Grey" <%= product?.color === 'Grey' ? 'selected' : '' %>>Grey</option>
+                                                                <option value="Blue" <%= product?.color === 'Blue' ? 'selected' : '' %>>Blue</option>
+                                                                <option value="Multi" <%= product?.color === 'Multi' ? 'selected' : '' %>>Multi</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="price"><span class="fw-bold text-dark text-capitalize">Price : </span></label>
+                                                            <input type="number" name="price" value="<%= product?.price %>" id="price" class="form-control" placeholder="Price" required>
+                                                            <p id="priceError" class="text-danger my-0"></p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="quantity"><span class="fw-bold text-dark text-capitalize">Quantity : </span></label>
+                                                            <input type="number" name="quantity" value="<%= product?.quantity %>" id="quantity" class="form-control" placeholder="Quantity" required>
+                                                            <p id="quantityError" class="text-danger my-0"></p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                            <label for="size"><span class="fw-bold text-dark text-capitalize">Size : </span></label>
+                                                            <select id="inputState" name="size" class="form-control form-control-md" required>
+                                                                <option value="S" <%= product?.size === 'S' ? 'selected' : '' %>>S</option>
+                                                                <option value="M" <%= product?.size === 'M' ? 'selected' : '' %>>M</option>
+                                                                <option value="L" <%= product?.size === 'L' ? 'selected' : '' %>>L</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <label for="description"><span class="fw-bold text-dark text-capitalize">Description : </span></label>
+                                                            <input type="text" class="form-control my-0" name="description" id="description" value="<%= product?.description %>" id="validationTextarea" placeholder="Description" required style="height: 100px;"></input>
+                                                            <p id="descriptionError" class="text-danger my-0"></p>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <input type="file" name="image" accept="image/*" class="custom-file-input" id="customFile" multiple>
+                                                            <label class="custom-file-label" for="customFile">Upload Image</label>
+                                                        </div>
+
+                                                        <div class="row px-4 d-flex flex-wrap">
+                                                            <% for (let i=0;i<product.images.length;i++) { %>
+                                                                <div class="col-lg-3 col-md-3 col-sm-3 mt-3">
+                                                                    <% if(product.images[i]){ %>
+                                                                        <img  src="/admin/asset/img/product/<%= product.images[i] %>" alt="image" style="width:200px;height:180px;">
+                                                                        <button type="button" class="btn btn-dark text-white mt-2 w-100"><a href="/admin/singleimagedelete?image=<%= product.images[i] %>&pid=<%= product._id %>" class=""><i class="fas fa-trash-alt text-white"></i></a></button>
+                                                                        <!-- <button class="btn btn-dark text-white ml-2" onclick="deleteImage('<%#= product.images[i] %>','<%#= product._id %>')">Delete</button> -->
+                                                                    <% } %> 
+                                                                </div>
+                                                            <% } %>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <button type="submit" class="btn btn-dark w-100 mx-auto" style="margin-top: 40px;">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </form>   
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <!-- add category end -->
+                </div>
+                <!-- Add/Edit category end -->
+                
+            </div>
+        </div>
+        <!-- /.content -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- /#right-panel -->
+
+    <script>
+
+        //-------------- form validation ---------------
+        function productValidation(){
+            const productname = document.getElementById('productname');
+            const brandname = document.getElementById('brandname');
+            const price = document.getElementById('price');
+            const quantity = document.getElementById('quantity');
+            const description = document.getElementById('description');
+            // const gender = document.getElementById('gender');
+            // const productcategory = document.getElementById('productcategory');
+            // const color = document.getElementById('color');
+            // const size = document.getElementById('size');
+            // const image = document.getElementById('image');
+            //----------Error feilds
+            const productnameError = document.getElementById('productnameError');
+            const brandnameError = document.getElementById('brandnameError');
+            const priceError = document.getElementById('priceError');
+            const quantityError = document.getElementById('quantityError');
+            const descriptionError = document.getElementById('descriptionError');
+            // const genderError = document.getElementById('genderError');
+            // const productcategoryError = document.getElementById('productcategoryError');
+            // const colorError = document.getElementById('colorError');
+            // const sizeError = document.getElementById('sizeError');
+            // const imageError = document.getElementById('imageError');
+            //-----------Regex   
+
+            //* ------------- product name field ------------
+            if(productname.value.trim() === ''){
+                productnameError.innerHTML = 'You must enter the product name';
+                setTimeout(() => {
+                    productnameError.innerHTML = '';
+                }, 2000);
+                return false;
+            }
+            //* ------------- brand name field ------------
+            if(brandname.value.trim() === ''){
+                brandnameError.innerHTML = 'You must enter the brand name';
+                setTimeout(() => {
+                    brandnameError.innerHTML = '';
+                }, 2000);
+                return false;
+            }
+            //* ------------- price  field ------------
+            if(price.value.trim() === ''){
+                priceError.innerHTML = 'You must enter the price';
+                setTimeout(() => {
+                    priceError.innerHTML = '';
+                }, 2000);
+                return false;
+            }
+            //* ------------- quantity  field ------------
+            if(quantity.value.trim() === ''){
+                quantityError.innerHTML = 'You must enter the quantity';
+                setTimeout(() => {
+                    quantityError.innerHTML = '';
+                }, 2000);
+                return false;
+            }
+            //* ------------- description  field ------------
+            if(description.value.trim() === ''){
+                descriptionError.innerHTML = 'You must enter the description';
+                setTimeout(() => {
+                    descriptionError.innerHTML = '';
+                }, 2000);
+                return false;
+            }
+
+
+            return true;
+        }
+
+        // ----------- all selected file names to appear inside the input field----------
+        $(".custom-file-input").on("change", function() {
+            var files = [];
+            for (var i = 0; i < $(this)[0].files.length; i++) {
+                files.push($(this)[0].files[i].name);
+            }
+            $(this).siblings(".custom-file-label").addClass("selected").html(files.join(", "));
+        });
+
+        // delete on click function
+        // function deleteImage(image, pid) {
+        //     // Construct the URL
+        //     var url = '/admin/singleimagedelete?image=' + encodeURIComponent(image) + '&pid=' + encodeURIComponent(pid);
+        //     // Redirect to the URL
+        //     window.location.href = url;
+        // }
+
+    </script>
+    
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="/admin/asset/js/adminHome.js"></script>
+
+</body>
+</html>

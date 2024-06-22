@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+    <!-- jQuery -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+   <link rel="stylesheet" href="/user/asset/css/userOpt.css" type="text/css">
+
+</head>
+<body>
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/userRegistration.ejs') %>
+
+    <section class="container-fluid bg-body-tertiary d-block">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4" style="min-width: 500px;">
+                <div class="card bg-white mb-5 mt-5 border-0" style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02);">
+                    <div class="card-body p-5 text-center">
+                        <h4>Verify otp</h4>
+                        <p>OTP  was sent to <%= user?.email %></p>
+
+                        <div id="error-message" style="display:none; color: red;"></div>
+
+                        <form id="otpForm" action="/userOTPvarification" method="POST">
+                            <div class="otp-field mb-4">
+                                <input type="number" name="verify1" maxlength="1"/>
+                                <input type="number" name="verify2" maxlength="1" disabled />
+                                <input type="number" name="verify3" maxlength="1" disabled />
+                                <input type="number" name="verify4" maxlength="1" disabled />
+                            </div>
+                
+                            <button type="submit" class="btn mb-3 text-white">Submit OTP</button>
+                            <button type="button" class="btn mb-3 text-white" id="resendOTPBtn" >Resend OTP</button>
+                        </form>
+                        <h6 id="OtpTimer">Please wait 60 seconds for resending OTP button</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+
+
+    <!-- Js Plugins -->
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+    <script src="/user/asset/js/userOtp.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#otpForm').on('submit', function(event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/userOTPvarification',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            $('#error-message').text(response.message).show();
+                            setTimeout(function() {
+                                $('#error-message').hide();
+                            }, 5000);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        // $('#error-message').text('An error occurred. Please try again.').show();
+                        // setTimeout(function() {
+                        //     $('#error-message').hide();
+                        // }, 5000);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+   <link rel="stylesheet" href="/user/asset/css/userDash.css" type="text/css">
+
+</head>
+
+<style>
+    .form-control:focus {
+        border-color: #ced4da; /* Set border color to default */
+        box-shadow: none; /* Remove box shadow */
+    }
+</style>
+
+<body style="background-color: rgb(240, 239, 239);">
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/userRegistration.ejs') %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content in offcanvas -->
+    
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <form action="/updateAddress" method="post" class="checkout__form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="h5 text-dark mb-4">Update Address</p>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>FullName :</p><input type="text" value="<%= address.fullName %>" name="fullname" placeholder="Enter Fullname">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>Email :</p><input type="email" value="<%= address.email %>" name="email" placeholder="Enter Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="checkout__form__input">
+                                        <p>Address 1 :</p><input type="text" value="<%= address.addressLine1 %>" name="addressline1" placeholder="Enter Street Address">
+                                    </div>
+                                    <div class="checkout__form__input">
+                                        <p>Address 2 : <span>(optional)</span></p><input type="text" value="<%= address.addressLine2 %>" name="addressline2" placeholder="Enter Street Address ">
+                                    </div>
+                                </div>
+                                                                                                                    
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="checkout__form__input">
+                                        <p>Phone :</p><input type="text" value="<%= address.phone %>" name="phone" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="checkout__form__input">
+                                        <p>Postcode/Zip :</p><input type="text" value="<%= address.pinCode %>" name="pincode" placeholder="Enter Pincdoe">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="checkout__form__input">
+                                        <p>Town/City :</p><input type="text" value="<%= address.city %>" name="city" placeholder="Enter City Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="checkout__form__input">
+                                        <p>Country:</p>
+                                        <select class="form-control" name="country" style="height: 50px;">
+                                            <option disabled selected value="">Select Country</option>
+                                            <option value="India" <%= address?.country === 'India' ?'selected' :  '' %>>India</option>
+                                            <option value="Qater" <%= address?.country === 'Qater' ?'selected' :  '' %>>Qater</option>
+                                            <option value="Saudi Aradia" <%= address?.country === 'Saudi Aradia' ?'selected' :  '' %>>Saudi Aradia</option>
+                                            <option value="Spain" <%= address?.country === 'Spain' ?'selected' :  '' %>>Spain</option>
+                                            <option value="United States" <%= address?.country === 'United States' ?'selected' :  '' %>>United States</option>
+                                            <option value="Dubai" <%= address?.country === 'Dubai' ?'selected' :  '' %>>Dubai</option>
+                                        </select>
+                                    </div>
+                                </div>                                            
+                                <div class="col-lg-4 col-md-4 col-sm-4"> 
+                                    <div class="form-group">
+                                        <label for="addressType">Address Type:</label>
+                                        <select class="form-control" id="addressType" name="addresstype" style="height: 50px;">
+                                            <option disabled selected value="">Select AddressType</option>
+                                            <option value="Home" <%= address?.addressType === 'Home' ?'selected' :  '' %>>Home</option>
+                                            <option value="Work" <%= address?.addressType === 'Work' ?'selected' :  '' %>>Work</option>
+                                        </select>
+                                    </div>
+                                </div>    
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="checkout__form__input">
+                                        <p>State:</p>
+                                        <select class="form-control" name="state" style="height: 50px;">
+                                            <option disabled selected value="">Select State</option>                                              
+                                            <option value="Bihar" <%= address?.state === 'Bihar' ?'selected' :  '' %>>Bihar</option>
+                                            <option value="Goa" <%= address?.state === 'Goa' ?'selected' :  '' %>>Goa</option>
+                                            <option value="Gujarat" <%= address?.state === 'Gujarat' ?'selected' :  '' %>>Gujarat</option>
+                                            <option value="Haryana" <%= address?.state === 'Haryana' ?'selected' :  '' %>>Haryana</option>
+                                            <option value="Himachal Pradesh" <%= address?.state === 'Himachal Pradesh' ?'selected' :  '' %>>Himachal Pradesh</option>
+                                            <option value="Karnataka" <%= address?.state === 'Karnataka' ?'selected' :  '' %>>Karnataka</option>
+                                            <option value="Kerala" <%= address?.state === 'Kerala' ?'selected' :  '' %>>Kerala</option>
+                                            <option value="Madhya Pradesh" <%= address?.state === 'Madhya Pradesh' ?'selected' :  '' %>>Madhya Pradesh</option>
+                                            <option value="Maharashtra" <%= address?.state === 'Maharashtra' ?'selected' :  '' %>>Maharashtra</option>
+                                            <option value="Punjab" <%= address?.state === 'Punjab' ?'selected' :  '' %>>Punjab</option>
+                                            <option value="Rajasthan" <%= address?.state === 'Rajasthan' ?'selected' :  '' %>>Rajasthan</option>
+                                            <option value="Tamil Nadu" <%= address?.state === 'amil Nadu' ?'selected' :  '' %>>Tamil Nadu</option>
+                                            <option value="Uttar Pradesh" <%= address?.state === 'Uttar Pradesh' ?'selected' :  '' %>>Uttar Pradesh</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input  type="hidden" name="aid" value="<%=address?._id%>">
+                                
+                                <div class="col-lg-12 mt-4 mb-2">
+                                    <button type="submit" class="btn btn-dark w-100">Save</button>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+
+    <!-- Js Plugins -->
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+    <!-- font awsome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    
+    <!-- Include Toastr CSS -->
+    <link rel="stylesheet" href="/home/asset/css/toastr.min.css" type="text/css">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+
+</head>
+
+<body>
+    
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+     <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/userRegistration.ejs') %>
+
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 p-0">
+                    <div class="categories__item categories__large__item set-bg"
+                    data-setbg="/home/asset/img/categories/pm11.jpg">
+                    <div class="categories__text">
+                        <h1>Men’s fashion</h1>
+                        <a href="#" style="color: white;">Shop now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                        <div class="categories__item set-bg" data-setbg="/home/asset/img/categories/pw5.jpg">
+                            <div class="categories__text">
+                                <h4 style="color: white;">Women’s fashion</h4>
+                                <a href="#" style="color: white;">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="/home/asset/img/categories/pwa5.jpg" >
+                            <div class="categories__text">
+                                <h4>Women’s Accessories</h4>
+                                <a href="#" >Shop now</a>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                        <div class="categories__item set-bg" data-setbg="/home/asset/img/categories/pma2.jpg">
+                            <div class="categories__text">
+                                <h4 style="color: white;">Accessories</h4>
+                                <a href="#" style="color: white;">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- product category section -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__details__tab" style="padding-top:10px;margin-bottom:10px;">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><span style="font-size:smaller">Men’s</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"><span style="font-size:smaller">Women’s</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"><span style="font-size:smaller">Accessories</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <h6>New Products</h6>
+                                <div class="row ">
+                                    <% if(menHome && menHome.length > 0){ %>
+                                        <% for(let i=0;i<menHome.length;i++){ %>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 mix men">
+                                                <div class="product__item" >
+                                                    <div class="product__item__pic" style="background-image: url('/admin/asset/img/product/<%= menHome[i]?.images[0] %>');">
+                                                        <div class="label new">New</div>
+
+                                                        <div class="wishlist d-flex justify-content-end m-2">
+                                                            <span class="d-flex justify-content-center align-items-center" style="width: 40px;height:40px;border-radius:50%;">
+                                                                <% if (locals.user) { %>
+                                                                    <% const isInWishlist = user.wishlist.some(item => item.productId.toString() === menHome[i]._id.toString()); %>
+                                                                    <i id="wicon-<%= menHome[i]._id %>", onclick="addToWishlist('<%= menHome[i]._id %>', event)" class="bi bi-heart-fill" style="color: <%= isInWishlist ? 'red' : 'rgb(255, 255, 255)' %>; font-size: 24px;"></i>
+                                                                <% } else { %>
+                                                                    <i  class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 24px;"></i>
+                                                                <% } %>
+                                                            </span>
+                                                        </div>
+
+                                                        <ul class="product__hover">
+                                                            <li><a href="/admin/asset/img/product/<%= menHome[i]?.images[0] %>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                                            <!-- <li><a href="#" onclick="addToWishlist('<%#= menHome[i]._id %>',event)"><span class="icon_heart_alt"></span></a></li> -->
+                                                            <li><a href="#" onclick="addToCart('<%= menHome[i]._id %>',event)"><span class="icon_bag_alt"></span></a></li>
+                                                        </ul>
+                                                        <% if (menHome[i].quantity <= 0) { %>
+                                                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;font-size: small;" class="alert-danger text-danger p-2 font-weight-bold badge">Out of stock</span>
+                                                        <% } %>
+                                                    </div>                                                   
+                                                    <div class="product__item__text">
+                                                        <h6 class="my-2"><a href="#" onclick="redirectToProductDetail('<%= menHome[i]._id %>')"><%= menHome[i]?.productName %></a></h6>                                                        
+                                                        <div class="rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                        <% if (menHome[i].price && menHome[i].offerPrice) { %>
+                                                            <div class="product__price" style="display: flex; justify-content:space-evenly;">
+                                                                <span>&#8377; <%= menHome[i]?.price %></span>
+                                                                <p class="font-weight-bold">&#8377; <%= menHome[i]?.offerPrice %></p>
+                                                            </div>
+                                                        <% } else { %>
+                                                            <div class="product__price">&#8377; <%= menHome[i]?.price %></div>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    <% }else{ %>
+                                        <p>No products for men.</p>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <h6>New Products</h6>
+                                <div class="row">
+                                    <% if (womenHome &&womenHome.length > 0) { %>
+                                        <% for (let i = 0; i < womenHome.length; i++) { %>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                                                <div class="product__item" >
+                                                    <div class="product__item__pic" style="background-image: url('/admin/asset/img/product/<%= womenHome[i]?.images[0] %>');">
+                                                        <div class="label new">New</div>
+
+                                                        <div class="wishlist d-flex justify-content-end m-2">
+                                                            <span class="d-flex justify-content-center align-items-center" style="width: 40px;height:40px;border-radius:50%;">
+                                                                <% if (locals.user) { %>
+                                                                    <% const isInWishlist = user.wishlist.some(item => item.productId.toString() === womenHome[i]._id.toString()); %>
+                                                                    <i id="wicon-<%= womenHome[i]._id %>" onclick="addToWishlist('<%= womenHome[i]._id %>',event)" class="bi bi-heart-fill" style="color:<%= isInWishlist ? 'red' : 'rgb(255, 255, 255)' %>;font-size:24px;"></i>
+                                                                <% } else { %>
+                                                                    <i  class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 24px;"></i>
+                                                                <% } %>
+                                                            </span>
+                                                        </div>
+
+                                                        <ul class="product__hover">
+                                                            <li><a href="/admin/asset/img/product/<%= womenHome[i]?.images[0] %>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                                            <!-- <li><a href="#" onclick="addToWishlist('<%#= womenHome[i]._id %>',event)"><span class="icon_heart_alt"></span></a></li> -->
+                                                            <li><a href="#" onclick="addToCart('<%= womenHome[i]._id %>',event)"><span class="icon_bag_alt"></span></a></li>
+                                                        </ul>
+                                                        <% if (womenHome[i].quantity <= 0) { %>
+                                                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;font-size: small;" class="alert-danger text-danger p-2 font-weight-bold badge">Out of stock</span>
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="product__item__text">
+                                                        <h6 class="my-3"><a href="#" onclick="redirectToProductDetail('<%= womenHome[i]._id %>')"><%= womenHome[i]?.productName %></a></h6>
+                                                        <div class="rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>  
+                                                        <% if (womenHome[i].price && womenHome[i].offerPrice) { %>
+                                                            <div class="product__price" style="display: flex; justify-content:space-evenly;">
+                                                                <span>&#8377; <%= womenHome[i]?.price %></span>
+                                                                <p class="font-weight-bold">&#8377; <%= womenHome[i]?.offerPrice %></p>
+                                                            </div>                                       
+                                                        <% } else { %>
+                                                            <div class="product__price">&#8377; <%= womenHome[i]?.price %></div>
+                                                        <% } %>       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    <% } else { %>
+                                        <p>No products for Women.</p>
+                                    <% } %>
+                                </div>
+                                
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <h6>New Products</h6>
+                                <div class="row ">
+                                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
+                                        <div class="product__item sale">
+                                            <div class="product__item__pic set-bg" data-setbg="/home/asset/img/product/product-8.jpg">
+                                                <div class="label">Sale</div>
+                                                <ul class="product__hover">
+                                                    <li><a href="/home/asset/img/product/product-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__item__text">
+                                                <h6><a href="#">Water resistant backpack</a></h6>
+                                                <div class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end product category -->
+    
+    <!-- Banner Section Begin -->
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/home/asset/img/banner/banner-4.jpg" alt="Los Angeles" max-width="100%" >
+            </div>
+            <div class="carousel-item">
+                <img src="/home/asset/img/banner/banner-5.jpeg" alt="Chicago" max-width="100%"  >
+            </div>
+            <div class="carousel-item">
+                <img src="/home/asset/img/banner/banner-6.jpg" alt="New York" max-width="100%"   >
+            </div>
+        </div>    
+    </div>
+   
+    <!-- Trend Section Begin -->
+    <section class="trend spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="trend__content">
+                        <div class="section-title">
+                            <h4>Hot Trend</h4>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/ht-1.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Chain bucket bag</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/ht-2.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Pendant earrings</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/ht-3.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Cotton T-Shirt</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="trend__content">
+                        <div class="section-title">
+                            <h4>Best seller</h4>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/bs-1.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Cotton T-Shirt</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/bs-2.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Zip-pockets pebbled tote <br />briefcase</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/bs-3.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Round leather bag</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="trend__content">
+                        <div class="section-title">
+                            <h4>Feature</h4>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/f-1.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Bow wrap skirt</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/f-2.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Metallic earrings</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="/home/asset/img/trend/f-3.jpg" alt="">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>Flap cross-body bag</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">$ 59.0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discount Section Begin -->
+    <section class="discount" >
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-6 p-0">
+                    <div class="discount__pic">
+                        <img src="/home/asset/img/categories/pm6.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <div class="discount__text">
+                        <div class="discount__text__title">
+                            <span>Discount</span>
+                            <h2>Summer 2019</h2>
+                            <h5><span>Sale</span> 50%</h5>
+                        </div>
+                        <div class="discount__countdown" id="countdown-time">
+                            <div class="countdown__item">
+                                <span>22</span>
+                                <p>Days</p>
+                            </div>
+                            <div class="countdown__item">
+                                <span>18</span>
+                                <p>Hour</p>
+                            </div>
+                            <div class="countdown__item">
+                                <span>46</span>
+                                <p>Min</p>
+                            </div>
+                            <div class="countdown__item">
+                                <span>05</span>
+                                <p>Sec</p>
+                            </div>
+                        </div>
+                        <a href="#">Shop now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section Begin -->
+    <section class="services spad"  >
+        <hr style="padding: 5px 0px;">
+        <div class="container" >
+            <div class="row" >
+                <div class="col-lg-3 col-md-4 col-sm-6" >
+                    <div class="services__item" >
+                        <i class="fa fa-car"></i>
+                        <h6>Free Shipping</h6>
+                        <p>For all oder over $99</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="services__item">
+                        <i class="fa fa-money"></i>
+                        <h6>Money Back Guarantee</h6>
+                        <p>If good have Problems</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="services__item">
+                        <i class="fa fa-support"></i>
+                        <h6>Online Support 24/7</h6>
+                        <p>Dedicated support</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="services__item">
+                        <i class="fa fa-headphones"></i>
+                        <h6>Payment Secure</h6>
+                        <p>100% secure payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="padding: 5px 0px;">
+    </section>
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+    <!-- Search Begin -->
+    <!-- <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div> -->
+    
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Js Plugins -->
+    <!-- <script src="/home/asset/js/jquery-3.3.1.min.js"></script> -->
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+<!-- Custom Script -->
+<script>
+
+    function redirectToProductDetail(productId) {
+        window.location.href = '/productdetailpage?pid=' + productId;
+    }
+
+    function addToCart(productid,event){
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/addToCart",
+            data: { productid },
+            success: function (res) {
+                if(res.notLogin){
+                    const loginButton = document.querySelector('.login-button');
+                    if(loginButton){
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        loginButton.dispatchEvent(clickEvent);
+                    }else{
+                        console.error('Login button not found');
+                    }
+                }else if(res.toCart){
+                    if (typeof res.cartcount == "number") {
+                        const cartl = document.getElementById("cartlenght");
+                        cartl.innerHTML = res.cartcount;
+                    }
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "<i class='fa-solid fa-thumbs-up'>&nbsp</i> Item Added To Cart",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            title: 'swal-title-size',
+                            popup: 'swal-bg-color',  
+                        },
+                        html: true, // Enable HTML content
+                        backdrop: false
+                    });
+                } else {
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Item Not Added To Cart",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+        });
+    }
+
+    function addToWishlist(productId,event){
+        event.preventDefault();
+        $.ajax({
+            method : "POST",
+            url : '/addToWishlist',
+            data : { productId },
+            success : function(res){
+                if(res.notLogin){
+                    const loginButton = document.querySelector('.login-button');
+                    if(loginButton){
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        loginButton.dispatchEvent(clickEvent);
+                    }else{
+                        console.error('Login button not found');
+                    }
+                }else if(res.existing){ 
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "<i class='fas fa-solid fa-exclamation-circle'>&nbsp</i> Item already in Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            title: 'swal-title-size',
+                            popup: 'swal-bg-color', 
+                        },
+                        background: '#c01010',
+                        html: true, // Enable HTML content
+                        backdrop: false
+                    });
+                }else if(res.addedToWishlist){
+                    if(typeof res.wishlistSize == "number"){
+                        const wishlisticon = document.getElementById("wishlisticon");
+                        wishlisticon.innerHTML = res.wishlistSize;
+
+
+                        const wicon = document.getElementById(`wicon-${productId}`);
+                        console.log(`wicon-${productId}`,'icon id-----------');
+                        console.log(wicon);
+                        wicon.style.color = "red";
+                    };
+
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "<i class='fa-solid fa-thumbs-up'>&nbsp</i> Item Added To Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            title: 'swal-title-size',
+                            popup: 'swal-bg-color', 
+                        },
+                        html: true, // Enable HTML content
+                        backdrop: false
+                    });
+                }else{
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Item Not Added To Wishlist",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+        });
+    }
+
+</script>
+
+
+
+<style>
+    .swal-title-size {
+        font-size: 18px;
+        color: white;
+    }
+    .swal-bg-color {
+        background-color: #0aa014; 
+        width: 300px; /* Adjust the width as needed */
+        height: 60px;
+    }
+    .custom-confirm-button {
+        background-color: #000000 !important; /* Change the background color */
+        width: 200px !important; /* Change the width */
+    }
+</style>
+
+</body>
+
+</html>

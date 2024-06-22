@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E S S E N T I A L</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
+
+    <!-- font awsome -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/home/asset/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/magnific-popup.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/home/asset/css/style.css" type="text/css">
+
+</head>
+<body style="background-color: rgb(240, 240, 240);">
+    <!-- preloader -->
+    <%- include('./partials/home/homePreloader.ejs') %>
+    
+    <!-- header -->
+    <%- include('./partials/home/homeHeader.ejs') %>
+
+    <!-- LOGIN popup begin -->
+    <%- include('./partials/user/userLogin.ejs') %>
+
+    <!-- registration pop begin -->
+    <%- include('./partials/user/userRegistration.ejs') %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option mb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <a href="/userProfile">Profile</a>
+                        <a href="/orderList">Order List</a>
+                        <span>Order Detail</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5" style="max-width:1400px;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <h5 class="d-flex align-items-center font-weight-bold text-uppercase">Order Details</h5>
+                        <% if (order.orderStatus === "ORDER DELIVERED") { %>
+                            <a href="/downloadInvoice?order_id=<%= order._id %>" class="d-flex align-items-center ml-auto text-dark">Download Invoice &nbsp;
+                                <i style="font-size:20px;color: rgb(26, 167, 21);" class="fa-solid fa-file-arrow-down"></i>
+                            </a>
+                        <% } else { %>
+                         
+                        <% } %>
+                    </div>
+
+                    <div class="card-body">
+                        <% var sum = 0 %>                               
+                        <div class="row order-item-row">
+                            <div class="col-3 order-item-image mt-4">
+                                <img src="/admin/asset/img/product/<%= orderProduct[0].productId.images[0] %>" style="height:180px;width:160px;">
+                            </div>
+                            <div class="col-9 order-item-details p-2">                                                
+                                <p class="my-1" style="font-weight:500;color:black;">Product Name : <%= orderProduct[0].productId.productName %></p>
+                                <p class="my-2" style="font-weight:500;color:black;">Product Description : <%#= orderProduct[0].productId.description %></p>
+                                <p class="my-2" style="font-weight:500;color:black;">Brand Name : <%= orderProduct[0].productId.brandName %></p>
+                                <p class="my-2" style="font-weight:500;color:black;">Product Category : <%#= orderProduct[0].productId.category.categoryName %></p>
+                                <div class="d-flex">
+                                    <p class="mr-3" style="font-weight:500;color:black;">Price : &#8377; <%= orderProduct[0].productId.price * orderProduct[0].quantity %></p>
+                                    <p class="mx-3" style="font-weight:500;color:black;">Size : <%= orderProduct[0].productId.size %></p>
+                                    <p class="mx-3" style="font-weight:500;color:black;">Quantity : <%= orderProduct[0].quantity %></p>
+                                    <% if (orderProduct[0].productId.offerPrice) { %>
+                                        <p class="mr-3" style="font-weight:500;color:black;">Offer Price : &#8377; <%= orderProduct[0].productId.offerPrice %></p>
+                                    <% } else { %>
+                                        <p class="mr-3" style="font-weight:500;color:black;">Offer Price : &#8377; <%= orderProduct[0].productId.price %></p>
+                                    <% } %>
+                                    <% sum = sum + orderProduct[0].quantity * orderProduct[0].salePrice %>
+                                </div>
+
+                                <% orderProduct.forEach(product => { %>
+                                    <% if (product.productOrderStatus === "PRODUCT DELIVERED") { %>
+                                        <button class="btn btn-sm w-100 text-white mt-1" onclick="returnReq('<%= product.productId._id %>', '<%= orderId %>')" style="background-color: black;" data-toggle="modal" data-target="#returnModal">Return Product</button>
+                                    <% } else if (product.productOrderStatus === "CANCEL REQUEST ACCEPTED") { %>
+                                        <p class="text-danger text-uppercase font-weight-bold">This Ordered Product Is Cancelled</p>
+                                    <% } else if (product.productOrderStatus === "RETURN REQUEST ACCEPTED") { %>
+                                        <p class="text-danger text-uppercase font-weight-bold">This Ordered Product Is Returned</p>
+                                    <% } else if (product.productOrderStatus === "RETURN REQUEST REJECTED") { %>
+                                        <p class="text-danger text-uppercase font-weight-bold">This Ordered Product Cant Retrun Now</p>
+                                    <% } else if (product.productOrderStatus === "CANCEL REQUEST REJECTED") { %>
+                                        <p class="text-danger text-uppercase font-weight-bold">This Ordered Product Cant Cancel Now</p>
+                                    <% } else { %>
+                                        <button class="btn btn-sm w-100 text-white mt-1" onclick="cancelReq('<%= product.productId._id %>', '<%= orderId %>')" style="background-color: black;" data-toggle="modal" data-target="#cancelModal">Cancel Product</button>
+                                    <% } %>
+                                <% }) %>
+                                
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+
+                <!-- modal for cancel order request -->
+                <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form id="cancelOrderForm" method="POST" action="/productCancelRequest"> <!-- Updated action URL -->
+                                <div class="modal-header">
+                                  
+                                    <h5 class="modal-title font-weight-bold" id="cancelModalLabel">Reason for Canceling Order</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body my-4"> 
+                                    <input type="hidden" name="productId" id="cancelProductId" value=""> 
+                                    <input type="hidden" name="orderId" id="cancelOrderId" value=""> <!-- Hidden input for order ID -->
+                                    <select id="cancelReason" name="reason" class="form-control">
+                                        <option disabled selected value="">Select a reason</option>
+                                        <option value="Item no longer needed">Item no longer needed</option>
+                                        <option value="Found a better price elsewhere">Found a better price elsewhere</option>
+                                        <option value="Ordered by mistake">Ordered by mistake</option>
+                                        <option value="Order Delivery date Issue">Order Delivery date Issue</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer ">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-dark">Confirm Cancellation</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal for cancel order request -->
+
+                <!-- modal for return order request -->
+                <div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="returnModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form id="cancelOrderForm" method="POST" action="/productReturnRequest">
+                                <div class="modal-header">
+                                  
+                                    <h5 class="modal-title font-weight-bold" id="returnModalLabel">Reason for Return Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body my-4"> 
+                                    <input type="hidden" name="productId" id="returnProductId" value=""> 
+                                    <input type="hidden" name="orderId" id="returnOrderId" value="">
+                                    <select id="returnReason" name="returnReason" class="form-control">
+                                        <option disabled selected value="">Select a reason</option>
+                                        <option value="Item no longer needed">Damages in  product</option>
+                                        <option value="Found a better price elsewhere">Found damages in prpduct</option>
+                                        <option value="Ordered by mistake">Ordered by mistake</option>
+                                        <option value="Order Delivery date Issue">Prodcut size and color Issue</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer ">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-dark">Confirm Return</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal for return order request -->
+
+                <div class="card-other_product p-2" style="background-color: rgb(196, 195, 193);">
+                    <p class="text-uppercase mx-4 text-dark font-weight-bold">other Products in this order</p>
+                    <div class="row p-2">
+                        <% for( let i=0;i<relatedOrderProducts.length;i++ ) { %>
+                            <div class="col-2">
+                                <div>
+                                    <a href="">
+                                        <img src="/admin/asset/img/product/<%= relatedOrderProducts[i].productId.images[0] %>" height="150px" width="200px">
+                                    </a>
+                                </div>
+                                <p><%#= relatedOrderProducts[0].productId.productName %></p>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header" style="background-color: rgb(196, 195, 193);">
+                        <div class="row">
+                            <p class="col my-0 text-left" style="color: black;">Order Id :</p>
+                            <p class="col my-0 text-right" style="color: black;"> ODR<%= String(order._id).slice(-10) %></p>
+                        </div>
+                        <div class="row">
+                            <p class="col my-0 text-left" style="color: black;">Order Placed On : </p>
+                            <p class="col my-0 text-right" style="color: black;"><%= String(order.createdAt).slice(4,16) %></p>
+                        </div>
+                        <div class="row">
+                            <p class="col my-0 text-left" style="color: black;">Order Status :</p>
+                            <p class="col my-0 text-right" style="color: black;"><%= order.orderStatus %></p>
+                        </div>
+                        <div class="row">
+                            <p class="col my-0 text-left" style="color: black;">Payment Method :</p>
+                            <p class="col my-0 text-right" style="color: black;"><%= order.paymentDetails %></p>
+                        </div>
+                    </div>
+                    <div class="card-body mx-2">
+                        <h6 class="card-title my-0 p-0 font-weight-bold">Payment Details</h6>
+                        <hr class="my-2" style="background-color: black;">
+                        <div class="row mb-0">
+                            <p class="col m-0 text-left" style="font-weight:500;color:black;">Order Amount : </p>
+                            <p class="col h6 m-0 text-right">&#8377; <%=order.totalAmount%></p>           
+                        </div>             
+                        <div class="row mb-0">
+                            <p class="col m-0 text-left" style="font-weight:500;color:black;">Coupon Applied : </p>
+                            <p class="col m-0 text-right" style="color: black;"><%= order.coupon %> </p>
+                        </div>
+                        <div class="row mb-0">
+                            <p class="col m-0 text-left" style="font-weight:500;color:black;">Shipment Fee : </p>
+                            <p class="col m-0 text-right">Free Shipment </p>
+                        </div>
+                        <div class="row mb-0">
+                            <p class="col m-0 text-left" style="font-weight:500;color:black;">Order Savings : </p>
+                            <p class="col h6 m-0 text-right">&#8377; <%= order.discount %></p>
+                        </div>
+                        <div class="row mb-0">
+                            <p class="col m-0 text-left" style="font-weight:500;color:black;">Order Total : </p>
+                            <% if (order.amountPaided) { %>
+                                <p class="col h6 m-0 text-right">&#8377; <%= order.amountPaided %></p>
+                            <% } else { %>
+                                <p class="col h6 m-0 text-right">&#8377; <%= order.totalAmount - order.discount %></p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Other products card -->
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p class="h6 font-weight-bold">Deliver To :</p>
+                        <div>
+                            <div class="small mt-1">
+                                <p class="m-0 font-weight-bold"><%= order.shippingAddress.fullName %>
+                                    <span class="p-1 ml-5" style="border:1px solid rgb(0,0,0);"><%= order.shippingAddress.addressType %></span>
+                                </p>
+                                <p class="m-0"><%= order.shippingAddress.addressLine1 %></p>
+                                <p class="m-0"><%= order.shippingAddress.addressLine2 %></p>
+                                <p class="m-0"><%= order.shippingAddress.email %>,<%= order.shippingAddress.phone %></p>
+                                <p class="m-0"><%= order.shippingAddress.city %>,<%= order.shippingAddress.state %>,<%= order.shippingAddress.country %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <!-- footer -->
+    <%- include('./partials/home/homeFooter.ejs') %>
+
+
+
+    <!-- Js Plugins -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <script src="/home/asset/js/bootstrap.min.js"></script>
+    <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
+    <script src="/home/asset/js/jquery-ui.min.js"></script>
+    <script src="/home/asset/js/mixitup.min.js"></script>
+    <script src="/home/asset/js/jquery.countdown.min.js"></script>
+    <script src="/home/asset/js/jquery.slicknav.js"></script>
+    <script src="/home/asset/js/owl.carousel.min.js"></script>
+    <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
+    <script src="/home/asset/js/main.js"></script>
+
+
+    <script>
+        function cancelReq(productId,orderId){          
+            document.getElementById('cancelOrderId').value = orderId;
+            document.getElementById('cancelProductId').value = productId;
+            console.log(productId)
+        }
+        function returnReq(productId,orderId){
+            document.getElementById('returnOrderId').value = orderId;
+            document.getElementById('returnProductId').value = productId;
+        }
+    </script>
+
+
+</body>
+</html>
