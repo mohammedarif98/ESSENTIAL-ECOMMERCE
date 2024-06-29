@@ -91,6 +91,7 @@ const updateCategory = async(req,res)=>{
     }
 };
 
+
 //----------------- deleting the Category
 const deleteCategory = async (req,res)=>{
     try{

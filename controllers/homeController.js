@@ -16,7 +16,7 @@ const homePage = async(req,res)=>{
                 user = null;
                 console.log("your account has been blocked from admin. contact admin")
             } 
-            console.log(user)
+            // console.log(user)
         }
         
         const menHome = await Product.find({gender:'Men',isListed:true,}).sort({createdAt:-1}).limit(8) ||null; 

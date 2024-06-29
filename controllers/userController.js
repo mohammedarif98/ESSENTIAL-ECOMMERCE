@@ -230,6 +230,7 @@ const userProfile = async(req,res)=>{
 
         const user = await User.findById(req.session.user_id);
         const walletBalance = user.wallet.map((balance)=>balance.amount).reduce((acc,total)=>acc+total,0);
+        const roundededWalletBalance = Math.floor(walletBalance);
 
         if(!user){
             console.error("User not found");
@@ -247,15 +248,8 @@ const userProfile = async(req,res)=>{
         const count = await Order.countDocuments();
         totalPages = Math.ceil(count / limit);
 
-        // wallet pagination
-        // const {wPage = 1,wLimit = 10} = req.query;
-        // const wCurrentPage = parseInt(wPage);
-        // const wSkip = (wCurrentPage-1)*wLimit;
-        // const walletPagnation = await User.find({}).limit(+wLimit).skip(wSkip).sort({createdAt:-1}); 
-        // const wCount = await User.countDocuments();
-        // totalPages = Math.ceil(wCount / wLimit);
-
-        res.render('userProfile',{user,wallet:walletBalance,order:orders,orderPagnation,totalPages,currentPage,limit});
+        res.render('userProfile',{user,wallet:roundededWalletBalance,order:orders,orderPagnation,totalPages,currentPage,limit});
+        // res.render('userProfile',{user,wallet:walletBalance,order:orders,orderPagnation,totalPages,currentPage,limit});
     }catch(error){
         console.log("Error in user controller userProfile",error.stack);
         res.status(500).send('Internal Server Error');
