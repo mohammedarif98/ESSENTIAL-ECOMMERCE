@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema({
     },
     phone : {
         type : Number,
-        required : true
+        required : false
     },
     image :{
         type : String,
@@ -71,7 +71,7 @@ const userSchema = new mongoose.Schema({
     },
     password : {
         type : String,
-        required : true
+        required : false
     },
     createdAt: {
         type: Date,
@@ -80,10 +80,14 @@ const userSchema = new mongoose.Schema({
     isBlocked:{
         type: Boolean,
         default : false,
-    },
+    },  
     isActive:{
         type: Boolean,
         default : true
+    },
+    isGoogle:{
+        type : Boolean,
+        default : false
     },
     cart : [{ productId : {type : mongoose.Schema.Types.ObjectId,ref : 'Product'},quantity : Number}],
     address : [addressSchema],

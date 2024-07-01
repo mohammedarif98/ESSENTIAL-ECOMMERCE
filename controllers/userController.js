@@ -529,6 +529,34 @@ const updatePassword = async(req,res)=>{
 
 
 
+////---------------googler auth=----------------
+
+const googleAuth = async(req,res)=>{
+    try {
+        console.log('Google authentication successful.');
+        console.log('User:', req.user);
+        const findUser = await User.findOne({ email: req.user.email });
+        if (findUser) {
+            req.session.user_id = findUser._id
+        }else{
+            const user = req.user
+            const saveUserData = new User({
+                username : user.displayName,
+                email : user.emails[0].value,
+                image : user.photos[0].value,
+                isGoogle : true
+            });
+            await saveUserData.save();
+            req.session.user_id = saveUserData._id  
+        }
+        res.redirect('/')
+    } catch (error) {
+        console.log('errro hapence in the google login route ',error);
+    }
+
+}
+
+
 
 
 
@@ -608,4 +636,5 @@ module.exports = {
     passwordForgetOtpPage,
     passwordForgetOtp,
     updatePassword,
+    googleAuth
 };

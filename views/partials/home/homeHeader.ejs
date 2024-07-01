@@ -147,7 +147,11 @@
                             <li class="nav-item dropdown">
                                 <a href="/userProfile" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
                                     <% if (user.image) { %>
-                                        <img class="img-fluid rounded-circle" src="/user/asset/img/userImage/<%= user?.image %>" alt="Profile Image" style="height:30px;width:35px;">
+                                        <% if (user.isGoogle) { %>
+                                            <img class="img-fluid rounded-circle" src="<%= user?.image %>" alt="Profile Image" style="height:30px;width:35px;">
+                                        <% } else { %>
+                                            <img class="img-fluid rounded-circle" src="/user/asset/img/userImage/<%= user?.image %>" alt="Profile Image" style="height:30px;width:35px;">
+                                        <% } %>
                                     <% } else { %>
                                         <img class="img-fluid rounded-circle" src="/user/asset/img/3135715.png" alt="Profile Image" style="height:30px;width:35px;">
                                     <% } %>

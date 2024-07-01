@@ -16,7 +16,6 @@ const homePage = async(req,res)=>{
                 user = null;
                 console.log("your account has been blocked from admin. contact admin")
             } 
-            // console.log(user)
         }
         
         const menHome = await Product.find({gender:'Men',isListed:true,}).sort({createdAt:-1}).limit(8) ||null; 
@@ -133,8 +132,8 @@ const productDetailPage = async(req,res,next)=>{
     }
 }
 
-//--------------- function for sorting  the  product
-const productSort = async (req, res) => {
+//--------------- function for sorting the mens-product
+const mensProductSort = async (req, res) => {
     try {
         const { sort } = req.query;
 
@@ -161,6 +160,61 @@ const productSort = async (req, res) => {
     }
 };
 
+// --------------Controller for sorting the women's products
+const womansProductSort = async (req, res) => {
+    try {
+        const { sort } = req.query;
+
+        let sortOptions = {};
+        if (sort === "priceLowToHigh") {
+            sortOptions = { price: 1 };
+        } else if (sort === "priceHighToLow") {
+            sortOptions = { price: -1 };
+        } else if (sort === "ascending") {
+            sortOptions = { productName: 1 };
+        } else if (sort === "descending") {
+            sortOptions = { productName: -1 };
+        } else if (sort === "newestArrival") {
+            sortOptions = { createdAt: -1 };
+        } else {
+            sortOptions = { createdAt: 1 };
+        }
+
+        const productSort = await Product.find({ gender: "Woman" }).sort(sortOptions);
+        res.status(200).json(productSort);
+    } catch (error) {
+        console.error("Found an error in productSort controller", error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+//----------------- Function for sorting all products
+const productSort = async (req, res) => {
+    try {
+        const { sort } = req.query;
+
+        let sortOptions = {};
+        if (sort === "priceLowToHigh") {
+            sortOptions = { price: 1 };
+        } else if (sort === "priceHighToLow") {
+            sortOptions = { price: -1 };
+        } else if (sort === "ascending") {
+            sortOptions = { productName: 1 };
+        } else if (sort === "descending") {
+            sortOptions = { productName: -1 };
+        } else if (sort === "newestArrival") {
+            sortOptions = { createdAt: -1 };
+        } else {
+            sortOptions = { createdAt: 1 };
+        }
+
+        const productSort = await Product.find({}).sort(sortOptions);
+        res.status(200).json(productSort);
+    } catch (error) {
+        console.error("Found an error in productSort controller", error);
+        res.status(500).json({ message: error.message });
+    }
+};
 
 //--------------- function for filtering size of  the  product
 const filterSize = async (req, res) => {
@@ -183,8 +237,6 @@ const filterSize = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
-
 
 //--------------- function for filtering category of  the  product
 const categoryFilter = async (req, res) => {
@@ -237,7 +289,7 @@ const categoryFilter = async (req, res) => {
     }
 };
 
-// ----------------- searching
+// ----------------- searching ---------------
 const searchResult = async (req, res) => {
     try {
 
@@ -305,6 +357,8 @@ module.exports = {
     menProductList,
     womenProductList,
     productDetailPage,
+    mensProductSort,
+    womansProductSort,
     productSort,
     filterSize,
     categoryFilter,

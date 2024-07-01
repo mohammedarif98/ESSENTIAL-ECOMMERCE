@@ -36,50 +36,45 @@
 </head>
 
 <style>
-
-        /* Hide the default checkbox */
-        input[type="checkbox"] {
+    /* Custom styles for radio buttons */
+    input[type="radio"] {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        width: 10px; /* Reduced width */
-        height: 10px; /* Reduced height */
-        border: 1px solid #000000;
-        border-radius: 1px;
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: 0; /* Makes it a square */
         position: relative;
         cursor: pointer;
         outline: none;
-        background: #ffffff;
     }
 
-    /* Background color for the checkbox */
-    input[type="checkbox"]::before {
-        content: '';
+    input[type="radio"]:checked {
+        background-color: #000;
+    }
+
+    input[type="radio"]::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 8px; /* Reduced width */
-        height: 8px; /* Reduced height */
-        background: #ffffff;
-        border-radius: 1px;
         transform: translate(-50%, -50%);
+        border-radius: 0; /* Keeps inner square square */
     }
 
-    /* Tick mark for the checkbox */
-    input[type="checkbox"]:checked::after {
-        content: '\2714';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: #fc0303;
-        font-size: 16px; /* Reduced font size to fit within the smaller checkbox */
-        transform: translate(-50%, -50%);
+    input[type="radio"]:checked::after {
+        background-color: #000;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #000;
+        border-radius: 0; /* Keeps inner square square */
     }
-    /* Change background and border color when checked */
-    input[type="checkbox"]:checked {
-        background: #ffffff;
-        border-color: #000000;
-    }
+    /* sweetalert tyling */
     .swal-title-size {
         font-size: 18px;
         color: white;
@@ -143,11 +138,26 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><input type="checkbox" id="priceLowToHigh" onclick="sortProducts('priceLowToHigh')"><label class="mx-2" >Price : Low to High</label></li>
-                                                    <li><input type="checkbox" id="priceHighToLow" onclick="sortProducts('priceHighToLow')"><label class="mx-2" >Price : High to Low</label></li>
-                                                    <li><input type="checkbox" id="ascending" onclick="sortProducts('ascending')"><label class="mx-2" >Name : Ascending</label></li>
-                                                    <li><input type="checkbox" id="descending" onclick="sortProducts('descending')"><label class="mx-2" >Name : Descending</label></li>
-                                                    <li><input type="checkbox" id="newestArrival" onclick="sortProducts('newestArrival')"><label class="mx-2">Newest Arrival</label></li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="newestArrival" onclick="sortProducts('newestArrival')">
+                                                        <label class="mx-2" for="newestArrival">Newest Arrival</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="ascending" onclick="sortProducts('ascending')">
+                                                        <label class="mx-2" for="ascending">Name : Ascending</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="descending" onclick="sortProducts('descending')">
+                                                        <label class="mx-2" for="descending">Name : Descending</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="priceLowToHigh" onclick="sortProducts('priceLowToHigh')">
+                                                        <label class="mx-2" for="priceLowToHigh">Price : Low to High</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="priceHighToLow" onclick="sortProducts('priceHighToLow')">
+                                                        <label class="mx-2" for="priceHighToLow">Price : High to Low</label>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -157,7 +167,7 @@
                         </div>
                 
                         <!-- Categories -->
-                        <!-- <div class="sidebar__categories">
+                        <div class="sidebar__categories">
                             <div class="section-title">
                                 <h4>Categories</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseCategories" role="button" aria-expanded="false" aria-controls="collapseCategories">
@@ -182,10 +192,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                 
                         <!-- Shop by Size -->
-                        <!-- <div class="sidebar__sizes">
+                        <div class="sidebar__sizes">
                             <div class="section-title">
                                 <h4>Shop by Size</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseSize" role="button" aria-expanded="false" aria-controls="collapseSize">
@@ -207,10 +217,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                 
                         <!-- Shop by Color -->
-                        <!-- <div class="sidebar__color">
+                        <div class="sidebar__color">
                             <div class="section-title">
                                 <h4>Shop by Color</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseColor" role="button" aria-expanded="false" aria-controls="collapseColor">
@@ -240,13 +250,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                                         
                     </div>   
                 </div>
 
                 <div class="col-lg-9 col-md-9">
-                    <div class="row">
+                    <div class="row" id="productList">
                         <% for(let i=0;i<products.length;i++){ %>
                             <div class="col-lg-4 col-md-6">
                                 <div class="product__item" >
@@ -256,10 +266,10 @@
                                         <div class="wishlist d-flex justify-content-end m-2">
                                             <span class="d-flex justify-content-center align-items-center" style="width: 40px;height:40px;border-radius:50%;">
                                                 <% if (locals.user) { %>
-                                                    <% const isInWishlist = user.wishlist.some(item => item.productId.toString() === products[i]._id.toString() ); %>
-                                                    <i id="wlist-<%= products[i]._id %>" onclick="addToWishlist('<%= products[i]._id %>',event)" class="bi bi-heart-fill" style="color: <%= isInWishlist ? 'red' : 'rgb(255,255,255)' %>;font-size :24px;"></i>
+                                                    <% const isInWishlist = locals.user.wishlist.some(item => item.productId.toString() === products[i]._id.toString()); %>
+                                                    <i id="wlist-<%= products[i]._id %>" onclick="addToWishlist('<%= products[i]._id %>', event)" class="bi bi-heart-fill" style="color: <%= isInWishlist ? 'red' : 'rgb(255, 255, 255)' %>; font-size: 20px;"></i>
                                                 <% } else { %>
-                                                    <i class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 24px;"></i>
+                                                        <i class="bi bi-heart-fill" style="color: rgb(255, 255, 255); font-size: 20px;"></i>
                                                 <% } %>
                                             </span>
                                         </div>
@@ -267,14 +277,14 @@
                                         <ul class="product__hover">
                                             <li><a href="/admin/asset/img/product/<%= products[i]?.images[0] %>" class="image-popup"><span class="arrow_expand"></span></a></li>
                                             <!-- <li><a href="#" onclick="addToWishlist('<%#= products[i]._id %>',event)"><span class="icon_heart_alt"></span></a></li> -->
-                                            <li><a href="#" onclick="addToCart('<%= products[i].id %>',event)"><span class="icon_bag_alt"></span></a></li>
+                                            <li><a href="#" onclick="addToCart('<%= products[i]._id %>',event)"><span class="icon_bag_alt"></span></a></li>
                                         </ul>
                                         <% if (products[i].quantity <= 0) { %>
                                             <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;font-size: small;" class="alert-danger text-danger p-2 font-weight-bold badge">Out of stock</span>
                                         <% } %>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6 class="my-3"><a href="#" onclick="redirectToProductDetail('<%= products[i]._id %>')"><%= products[i]?.productName %></a></h6>
+                                        <h6 class="my-3"><a href="#" onclick="redirectToProductDetail('<%= products[i]._id %>',event)"><%= products[i]?.productName %></a></h6>
                                         <div class="rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -284,32 +294,34 @@
                                         </div>
                                         <% if (products[i].price && products[i].offerPrice) { %>
                                             <div class="product__price" style="display: flex; justify-content:space-evenly;">
-                                                <span>&#8377; <%= products[i]?.price %></span>
-                                                <p class="font-weight-bold">&#8377; <%= products[i]?.offerPrice %></p>
+                                                <span>₹ <%= products[i]?.price %></span>
+                                                <p class="font-weight-bold">₹ <%= products[i]?.offerPrice %></p>
                                             </div>
                                         <% } else { %>
-                                            <div class="product__price"><%= products[i]?.price %></div>
+                                            <div class="product__price">₹ <%= products[i]?.price %></div>
                                         <% } %>
                                     </div>
                                 </div>
                             </div>
                          <% } %>
 
-                         <div class="col-lg-12 text-center mt-5">
+                        <!-- pagination code -->
+                        <div class="col-lg-12 text-center mt-5">
                             <div class="pagination__option d-inline-block">
                                 <% if (page>1) { %>
-                                    <a href="womenproductlist?page=<%= page-1 %>"><i class="fa fa-angle-left"></i></a>
+                                    <a href="menproductlist?page=<%= page-1 %>"><i class="fa fa-angle-left"></i></a>
                                 <% } %>
                                 <a href="#"><%= page %></a>
                                 <!-- <a href="#"><%#= totalPages %></a> -->
                                 <% if (page<totalPages) { %>
-                                    <a href="womenproductlist?page=<%= page+1 %>"><i class="fa fa-angle-right"></i></a>
+                                    <a href="menproductlist?page=<%= page+1 %>"><i class="fa fa-angle-right"></i></a>
                                 <% } %>
                             </div>
                         </div>
 
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -319,7 +331,7 @@
     <%- include('./partials/home/homeFooter.ejs') %>
 
     <!-- Js Plugins -->
-    <script src="/home/asset/js/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/home/asset/js/jquery-3.3.1.min.js"></script> -->
     <script src="/home/asset/js/bootstrap.min.js"></script>
     <script src="/home/asset/js/jquery.magnific-popup.min.js"></script>
     <script src="/home/asset/js/jquery-ui.min.js"></script>
@@ -333,7 +345,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- toastr -->
+    <!-- toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         
 
@@ -456,6 +468,40 @@
                         });
                     }
                 },
+            });
+        }
+        
+        // ------------------- womans product page ---------------------------
+        function sortProducts(sortOption) {
+            $.ajax({
+                url: '/womansProductSort',
+                type: 'GET',
+                data: { sort: sortOption },
+                success: function(data) {
+                    updateProduct(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Function to update the product list based on data
+        function updateProduct(data) {
+            $('.product__item').each(function(index) {
+                $(this).find('.product__item__pic').css('background-image', 'url("/admin/asset/img/product/' + data[index]?.images[0] + '")');
+                $(this).find('.product__item__text h6 a').text(data[index]?.productName);
+                
+                if (data[index]?.offerPrice) {
+                    $(this).find('.product__price').html(`
+                        <div class="product__price" style="display: flex;">
+                            <span class="mr-5">₹ ${data[index]?.price}</span>
+                            <p class="font-weight-bold">₹ ${data[index]?.offerPrice}</p>
+                        </div>
+                    `);
+                } else {
+                    $(this).find('.product__price').text('₹ ' + data[index]?.price);
+                }
             });
         }
     

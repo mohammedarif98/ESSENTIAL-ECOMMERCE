@@ -12,6 +12,7 @@ const adminRouter = require("./routes/adminRouter");
 const userRouter = require("./routes/userRouter");
 const homeRouter = require("./routes/homeRouter");
 const { notFoundHandler, errorHandler } = require("./middleware/errorHandler");
+const passport = require("passport");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -37,11 +38,16 @@ app.use(
     cookie: {
       // maxAge: 1000*5,   // session expry  after 5 sec
       maxAge: 1000 * 60 * 60 * 24, // Session expiry time (1 day)
-      httpOnly: true,
+      // httpOnly: true,
     },
   })
 );
 
+//---------- google autentication
+app.use(passport.initialize());
+app.use(passport.session());
+
+//------------ handle templats
 app.set("view engine", "ejs");
 app.set("views", [
   path.join(__dirname, "views"),
@@ -63,24 +69,6 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`server running in port ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

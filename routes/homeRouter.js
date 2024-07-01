@@ -41,6 +41,8 @@ router.post('/addToWishlist',cartController.addToWishlist);
 router.post('/removeWishlistItem',cartController.removeWishlistItem);
 
 //----------------search,sort,filter
+router.get('/mensProductSort',homeController.mensProductSort);
+router.get('/womansProductSort',homeController.womansProductSort);
 router.get('/productSort',homeController.productSort);
 router.get('/categoryFilter',homeController.categoryFilter);
 router.get('/filterSize',homeController.filterSize);

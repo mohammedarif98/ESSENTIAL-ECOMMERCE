@@ -30,55 +30,51 @@
 </head>
 
 <style>
-    /* Hide the default checkbox */
-    input[type="checkbox"] {
+    /* Custom styles for radio buttons */
+    input[type="radio"] {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        width: 10px; /* Reduced width */
-        height: 10px; /* Reduced height */
-        border: 1px solid #000000;
-        border-radius: 1px;
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: 0; /* Makes it a square */
         position: relative;
         cursor: pointer;
         outline: none;
-        background: #ffffff;
     }
 
-    /* Background color for the checkbox */
-    input[type="checkbox"]::before {
-        content: '';
+    input[type="radio"]:checked {
+        background-color: #000;
+    }
+
+    input[type="radio"]::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 8px; /* Reduced width */
-        height: 8px; /* Reduced height */
-        background: #ffffff;
-        border-radius: 1px;
         transform: translate(-50%, -50%);
+        border-radius: 0; /* Keeps inner square square */
     }
 
-    /* Tick mark for the checkbox */
-    input[type="checkbox"]:checked::after {
-        content: '\2714';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: #fc0303;
-        font-size: 16px; /* Reduced font size to fit within the smaller checkbox */
-        transform: translate(-50%, -50%);
+    input[type="radio"]:checked::after {
+        background-color: #000;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #000;
+        border-radius: 0; /* Keeps inner square square */
     }
-    /* Change background and border color when checked */
-    input[type="checkbox"]:checked {
-        background: #ffffff;
-        border-color: #000000;
-    }
+    /* sweetalert styling */
     .swal-title-size {
         font-size: 18px;
         color: white;
     }
     .swal-bg-color {
-        background-color: #149c1d; 
+        background-color: #11991a; 
         width: 300px; /* Adjust the width as needed */
         height: 60px;
     }
@@ -136,11 +132,26 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><input type="checkbox" id="priceLowToHigh" onclick="sortProducts('priceLowToHigh')"><label class="mx-2" >Price : Low to High</label></li>
-                                                    <li><input type="checkbox" id="priceHighToLow" onclick="sortProducts('priceHighToLow')"><label class="mx-2" >Price : High to Low</label></li>
-                                                    <li><input type="checkbox" id="ascending" onclick="sortProducts('ascending')"><label class="mx-2" >Name : Ascending</label></li>
-                                                    <li><input type="checkbox" id="descending" onclick="sortProducts('descending')"><label class="mx-2" >Name : Descending</label></li>
-                                                    <li><input type="checkbox" id="newestArrival" onclick="sortProducts('newestArrival')"><label class="mx-2">Newest Arrival</label></li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="newestArrival" onclick="sortProducts('newestArrival')">
+                                                        <label class="mx-2" for="newestArrival">Newest Arrival</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="ascending" onclick="sortProducts('ascending')">
+                                                        <label class="mx-2" for="ascending">Name : Ascending</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="descending" onclick="sortProducts('descending')">
+                                                        <label class="mx-2" for="descending">Name : Descending</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="priceLowToHigh" onclick="sortProducts('priceLowToHigh')">
+                                                        <label class="mx-2" for="priceLowToHigh">Price : Low to High</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="sortOption" id="priceHighToLow" onclick="sortProducts('priceHighToLow')">
+                                                        <label class="mx-2" for="priceHighToLow">Price : High to Low</label>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -150,7 +161,7 @@
                         </div>
                 
                         <!-- Categories -->
-                        <!-- <div class="sidebar__categories">
+                        <div class="sidebar__categories">
                             <div class="section-title">
                                 <h4>Categories</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseCategories" role="button" aria-expanded="false" aria-controls="collapseCategories">
@@ -174,12 +185,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
-                        </div> -->
+                        </div>
                 
                         <!-- Shop by Size -->
-                        <!-- <div class="sidebar__sizes">
+                        <div class="sidebar__sizes">
                             <div class="section-title">
                                 <h4>Shop by Size</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseSize" role="button" aria-expanded="false" aria-controls="collapseSize">
@@ -201,10 +211,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                 
                         <!-- Shop by Color -->
-                        <!-- <div class="sidebar__color">
+                        <div class="sidebar__color">
                             <div class="section-title">
                                 <h4>Shop by Color</h4>
                                 <a class="dropdown-toggle" style="color: black;" data-toggle="collapse" href="#collapseColor" role="button" aria-expanded="false" aria-controls="collapseColor">
@@ -234,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                                         
                     </div>   
                 </div>
@@ -324,11 +334,11 @@
     <script src="/home/asset/js/owl.carousel.min.js"></script>
     <script src="/home/asset/js/jquery.nicescroll.min.js"></script>
     <script src="/home/asset/js/main.js"></script>
-    <script src="/home/asset/js/SrchSrtFiltr.js"></script>
+    <!-- <script src="/home/asset/js/SrchSrtFiltr.js"></script> -->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <!-- sweet alert -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   <!-- jquery -->
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- toastr -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
@@ -453,6 +463,41 @@
             },
         });
         }
+
+        //----------------------------------
+        function sortProducts(sortOption) {
+            $.ajax({
+                url: '/productSort',
+                type: 'GET',
+                data: { sort: sortOption },
+                success: function(data) {
+                    updateProduct(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Function to update the product list based on data
+        function updateProduct(data) {
+            $('.product__item').each(function(index) {
+                $(this).find('.product__item__pic').css('background-image', 'url("/admin/asset/img/product/' + data[index]?.images[0] + '")');
+                $(this).find('.product__item__text h6 a').text(data[index]?.productName);
+                
+                if (data[index]?.offerPrice) {
+                    $(this).find('.product__price').html(`
+                        <div class="product__price" style="display: flex;">
+                            <span class="mr-5">₹ ${data[index]?.price}</span>
+                            <p class="font-weight-bold">₹ ${data[index]?.offerPrice}</p>
+                        </div>
+                    `);
+                } else {
+                    $(this).find('.product__price').text('₹ ' + data[index]?.price);
+                }
+            });
+        }
+
    </script>
 
 </body>
