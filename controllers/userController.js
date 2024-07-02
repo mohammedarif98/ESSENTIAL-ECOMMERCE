@@ -527,22 +527,19 @@ const updatePassword = async(req,res)=>{
     }
 }
 
-
-
-////---------------googler auth=----------------
-
+//---------------googler auth ----------------
 const googleAuth = async(req,res)=>{
     try {
         console.log('Google authentication successful.');
-        console.log('User:', req.user);
-        const findUser = await User.findOne({ email: req.user.email });
+        const userEmail = req.user.emails[0].value;
+        const findUser = await User.findOne({ email : userEmail });
         if (findUser) {
             req.session.user_id = findUser._id
         }else{
             const user = req.user
             const saveUserData = new User({
                 username : user.displayName,
-                email : user.emails[0].value,
+                email : userEmail,
                 image : user.photos[0].value,
                 isGoogle : true
             });
@@ -555,6 +552,8 @@ const googleAuth = async(req,res)=>{
     }
 
 }
+
+
 
 
 
