@@ -38,7 +38,7 @@ app.use(
     cookie: {
       // maxAge: 1000*5,   // session expry  after 5 sec
       maxAge: 1000 * 60 * 60 * 24, // Session expiry time (1 day)
-      // httpOnly: true,
+      httpOnly: true,
     },
   })
 );
